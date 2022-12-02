@@ -23,11 +23,6 @@ typedef	struct	s_img {
 	char	*filename;
 }	t_img;
 
-
-typedef struct s_player {
-	int	x;
-	int	y;
-}	t_player;
 typedef struct s_data {
 	void	*ptr;
 	void	*win;
@@ -48,7 +43,7 @@ void	put_empty(t_data mlx, int x, int y)
 		}
 		else if (istrue == 1)
 		{
-			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/coins12.xpm", &i, &i), y, x);
+			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/coins10.xpm", &i, &i), y, x);
 			istrue = 2;
 		}
 		else if (istrue == 2)
