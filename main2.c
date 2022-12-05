@@ -2,68 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include "minilibx/mlx.h"
+#include "so_long.h"
 
 # define WINDOW_WIDTH 1080
 # define WINDOW_HEIGHT 1920
-
-char	**getfullcontent(const char *filename);
-int	doublestrlen(char	**s);
-int	check_size(char	**s);
-int	check_wall(char	**s);
-int	check_players(char	**s);
-int	check_door(char	**s);
-int	check_coins(char	**s);
-int	check_invalid_char(char	**s);
-int	check_condition(char	**s);
-
-typedef	struct	s_img {
-	void	*img;
-	int		height;
-	int		width;
-	char	*filename;
-}	t_img;
-
-
-typedef struct s_player {
-	int	x;
-	int	y;
-}	t_player;
-typedef struct s_data {
-	void	*ptr;
-	void	*win;
-	void	*img;
-	int		width;
-	int		height;
-	char	*title;
-}		t_data;
-
-void	put_empty(t_data mlx, int x, int y)
-{
-		int i = 50;
-		static int	istrue;
-		if (istrue == 0)
-		{
-			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/coins9.xpm", &i, &i), y, x);
-			istrue = 3;
-		}
-		else if (istrue == 1)
-		{
-			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/coins12.xpm", &i, &i), y, x);
-			istrue = 2;
-		}
-		else if (istrue == 2)
-		{
-			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/coins12.xpm", &i, &i), y, x);
-			istrue = 3;
-		}
-		else if (istrue == 3)
-		{
-			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/coins12.xpm", &i, &i), y, x);
-			istrue = 1;
-		}
-		else
-			istrue = 0;
-}
 
 void	put_img(t_data mlx, const char	c, int	x, int y)
 {
@@ -74,9 +16,9 @@ void	put_img(t_data mlx, const char	c, int	x, int y)
 	  else if (c == 'E')
 	  	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/door.xpm", &i, &i), y, x);
 	  else if (c == 'P')
-	  	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/elf3.xpm", &i, &i), y, x);
+		  mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/elf3.xpm", &i, &i), y, x);
 	  else if (c == 'C')
-		  put_empty(mlx, x, y);
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/coins12.xpm", &i, &i), y, x);
 	  else
 	  	return ;
 }
@@ -103,6 +45,18 @@ void	drawing_map(t_data	mlx, char **map)
 	}
 }
 
+int genkey(int key, t_data mlx)
+{
+	int i = 50;
+	if (key == 53)
+		exit(1);
+	if (key == 13)
+	{
+		  mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/elf3.xpm", &i, &i), 50, 50);
+	}
+	return (0);
+}
+
 int main(int argc, char const *argv[])
 {
 	char	**map = getfullcontent("maps");
@@ -114,25 +68,21 @@ int main(int argc, char const *argv[])
 		exit(0);
 	int	height = (strlen(map[0]) - 1) * 50;
 	int width = doublestrlen(map) * 50;
-	printf("width ==> %d   height ==> %d\n", width, height);
-
-	char	filename[] = "./png.png";
 	t_data mlx;
 	mlx.ptr = mlx_init();
-	mlx.title = "hello world";
+	mlx.title = "so long";
 	mlx.win = mlx_new_window(mlx.ptr, height, width, mlx.title);
 	int x = -50;
-	int y ;
-	int istrue = 50;
+	int y;
+	int s = 50;
 	while ((x += 50) < height)
 	{
 		y = -50;
 		while ((y += 50) < width)
-	  		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/bg10.xpm", &istrue, &istrue), x, y);
+	  		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/bg10.xpm", &s, &s), x, y);
 	}
-//	mlx_pixel_put(mlx.ptr, mlx.win, 10, 10, 0x0BE353);
-	
 	drawing_map(mlx, map);
+	mlx_key_hook(mlx.win, genkey, 0);
 	mlx_loop(mlx.ptr);
 	return 0;
 }
