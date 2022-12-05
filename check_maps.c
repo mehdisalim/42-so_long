@@ -155,12 +155,29 @@ int	check_condition(char	**s)
 	return (printf("check condition function is work :)\n"), 1);
 }
 
+int	getnumberoflines(const char	*filename)
+{
+	int i = 1;
+	int fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	char *str;
+	while ((str = get_next_line(fd)))
+	{
+		free(str);
+		i++;
+	}
+	close(fd);
+	printf("number of lines is : %d\n", i);
+	return (i);
+}
+
 char	**getfullcontent(const char *filename)
 {
 	int fd = open(filename, O_RDONLY);
 	if (fd == -1)
 			return (0);
-	char	**text = malloc(256 * sizeof(char *));
+	char	**text = malloc(getnumberoflines(filename) * sizeof(char *));
 	int		i = -1;
 	while (1)
 	{
