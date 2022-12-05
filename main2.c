@@ -7,6 +7,12 @@
 # define WINDOW_WIDTH 1080
 # define WINDOW_HEIGHT 1920
 
+typedef struct s_door_coord
+{
+	int xdoor;
+	int	ydoor;
+}	t_door_coord;
+
 void	put_img(t_data mlx, const char	c, int	x, int y)
 {
 	int	i = 50;
@@ -42,76 +48,82 @@ void	drawing_map(t_data	mlx, char **map)
 	}
 }
 
-char	**testing_map(char	**map)
+char	**move_up(char	**map, t_door_coord *door, int i, int j)
 {
 
+	if (map[i - 1][j] == 'E')
+	{
+		door->xdoor = i - 1;
+		door->ydoor = j;
+	}
+	map[i - 1][j] = 'P';
+	map[i][j] = '0';
+	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
+		map[door->xdoor][door->ydoor] = 'E';
+	return (map);
+}
+
+char	**move_down(char	**map, t_door_coord *door, int i, int j)
+{
+
+	if (map[i + 1][j] == 'E')
+	{
+		door->xdoor = i + 1;
+		door->ydoor = j;
+	}
+	map[i + 1][j] = 'P';
+	map[i][j] = '0';
+	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
+		map[door->xdoor][door->ydoor] = 'E';
+	return (map);
+}
+char	**move_right(char	**map, t_door_coord *door, int i, int j)
+{
+
+	if (map[i][j + 1] == 'E')
+	{
+		door->xdoor = i;
+		door->ydoor = j + 1;
+	}
+	map[i][j + 1] = 'P';
+	map[i][j] = '0';
+	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
+		map[door->xdoor][door->ydoor] = 'E';
+	return (map);
+}
+
+char	**move_left(char	**map, t_door_coord *door, int i, int j)
+{
+	if (map[i][j - 1] == 'E')
+	{
+		door->xdoor = i;
+		door->ydoor = j - 1;
+	}
+	map[i][j - 1] = 'P';
+	map[i][j] = '0';
+	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
+		map[door->xdoor][door->ydoor] = 'E';
+	return (map);
 }
 
 char	**changeplayerinmap(char	**map, int direction)
 {
-	int	i = 0, j;
-	static int xdoor;
-	static int ydoor;
-	while (map[i])
+	int	i = -1, j;
+	static t_door_coord door;
+	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
 			if (map[i][j] == 'P' && direction == 13 && map[i - 1][j] != '1')
-			{
-				if (map[i - 1][j] == 'E')
-				{
-					xdoor = i - 1;
-					ydoor = j;
-				}
-				map[i - 1][j] = 'P';
-				map[i][j] = '0';
-				if (xdoor && ydoor && map[xdoor][ydoor] == '0')
-					map[xdoor][ydoor] = 'E';
-				return (map);
-			}
-			else if (map[i][j] == 'P' && direction == 0 && map[i][j - 1] != '1')
-			{
-				if (map[i][j - 1] == 'E')
-				{
-					xdoor = i;
-					ydoor = j - 1;
-				}
-				map[i][j - 1] = 'P';
-				map[i][j] = '0';
-				if (xdoor && ydoor && map[xdoor][ydoor] == '0')
-					map[xdoor][ydoor] = 'E';
-				return (map);
-			}
-			else if (map[i][j] == 'P' && direction == 1 && map[i + 1][j] != '1')
-			{
-				if (map[i + 1][j] == 'E')
-				{
-					xdoor = i + 1;
-					ydoor = j;
-				}
-				map[i + 1][j] = 'P';
-				map[i][j] = '0';
-				if (xdoor && ydoor && map[xdoor][ydoor] == '0')
-					map[xdoor][ydoor] = 'E';
-				return (map);
-			}
-			else if (map[i][j] == 'P' && direction == 2 && map[i][j + 1] != '1')
-			{
-				if (map[i][j + 1] == 'E')
-				{
-					xdoor = i;
-					ydoor = j + 1;
-				}
-				map[i][j + 1] = 'P';
-				map[i][j] = '0';
-				if (xdoor && ydoor && map[xdoor][ydoor] == '0')
-					map[xdoor][ydoor] = 'E';
-				return (map);
-			}
-			j++;
+				return (move_up(map, &door, i, j));
+			if (map[i][j] == 'P' && direction == 0 && map[i][j - 1] != '1')
+				return (move_left(map, &door, i, j));
+			if (map[i][j] == 'P' && direction == 1 && map[i + 1][j] != '1')
+				return (move_down(map, &door, i, j));
+			if (map[i][j] == 'P' && direction == 2 && map[i][j + 1] != '1')
+				return (move_right(map, &door, i, j));
 		}
-		i++;
 	}
 	return (map);
 }
@@ -126,6 +138,19 @@ int genkey(int key, t_data *mlx)
 		drawing_map(*mlx, mlx->map);
 	}
 	return (0);
+}
+
+void	setup_background(t_data mlx, int height, int width)
+{	
+	int x = -50;
+	int y;
+	int s = 50;
+	while ((x += 50) < height)
+	{
+		y = -50;
+		while ((y += 50) < width)
+	  		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/bg10.xpm", &s, &s), x, y);
+	}
 }
 
 int main(int argc, char const *argv[])
@@ -144,17 +169,9 @@ int main(int argc, char const *argv[])
 	mlx.map = map;
 	mlx.title = "so long";
 	mlx.win = mlx_new_window(mlx.ptr, height, width, mlx.title);
-	int x = -50;
-	int y;
-	int s = 50;
-	while ((x += 50) < height)
-	{
-		y = -50;
-		while ((y += 50) < width)
-	  		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx_xpm_file_to_image(mlx.ptr, "./assets/bg10.xpm", &s, &s), x, y);
-	}
-	mlx_key_hook(mlx.win, genkey, &mlx);
+	setup_background(mlx, height, width);
 	drawing_map(mlx, mlx.map);
+	mlx_key_hook(mlx.win, genkey, &mlx);
 	mlx_loop(mlx.ptr);
 	return 0;
 }
