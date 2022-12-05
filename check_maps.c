@@ -14,7 +14,7 @@ int doublestrlen(char **s)
 int	check_size(char **s)
 {
 	int i = -1;
-	int len = 0;
+	size_t len = 0;
 
 	while (s[++i])
 	{
@@ -125,7 +125,6 @@ int	check_invalid_char(char **s)
 {
 	int i = -1;
 	int	j;
-	int	p = 0;
 	while (s[++i])
 	{
 		j = -1;

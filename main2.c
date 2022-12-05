@@ -1,17 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "minilibx/mlx.h"
 #include "so_long.h"
-
-# define WINDOW_WIDTH 1080
-# define WINDOW_HEIGHT 1920
-
-typedef struct s_door_coord
-{
-	int xdoor;
-	int	ydoor;
-}	t_door_coord;
 
 void	put_img(t_data mlx, const char	c, int	x, int y)
 {
@@ -46,64 +33,6 @@ void	drawing_map(t_data	mlx, char **map)
 		x += 50;
 		i++;
 	}
-}
-
-char	**move_up(char	**map, t_door_coord *door, int i, int j)
-{
-
-	if (map[i - 1][j] == 'E')
-	{
-		door->xdoor = i - 1;
-		door->ydoor = j;
-	}
-	map[i - 1][j] = 'P';
-	map[i][j] = '0';
-	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
-		map[door->xdoor][door->ydoor] = 'E';
-	return (map);
-}
-
-char	**move_down(char	**map, t_door_coord *door, int i, int j)
-{
-
-	if (map[i + 1][j] == 'E')
-	{
-		door->xdoor = i + 1;
-		door->ydoor = j;
-	}
-	map[i + 1][j] = 'P';
-	map[i][j] = '0';
-	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
-		map[door->xdoor][door->ydoor] = 'E';
-	return (map);
-}
-char	**move_right(char	**map, t_door_coord *door, int i, int j)
-{
-
-	if (map[i][j + 1] == 'E')
-	{
-		door->xdoor = i;
-		door->ydoor = j + 1;
-	}
-	map[i][j + 1] = 'P';
-	map[i][j] = '0';
-	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
-		map[door->xdoor][door->ydoor] = 'E';
-	return (map);
-}
-
-char	**move_left(char	**map, t_door_coord *door, int i, int j)
-{
-	if (map[i][j - 1] == 'E')
-	{
-		door->xdoor = i;
-		door->ydoor = j - 1;
-	}
-	map[i][j - 1] = 'P';
-	map[i][j] = '0';
-	if (door->xdoor && door->ydoor && map[door->xdoor][door->ydoor] == '0')
-		map[door->xdoor][door->ydoor] = 'E';
-	return (map);
 }
 
 char	**changeplayerinmap(char	**map, int direction)
@@ -153,7 +82,7 @@ void	setup_background(t_data mlx, int height, int width)
 	}
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
 	char	**map = getfullcontent("maps");
 
@@ -167,8 +96,7 @@ int main(int argc, char const *argv[])
 	t_data mlx;
 	mlx.ptr = mlx_init();
 	mlx.map = map;
-	mlx.title = "so long";
-	mlx.win = mlx_new_window(mlx.ptr, height, width, mlx.title);
+	mlx.win = mlx_new_window(mlx.ptr, height, width, "so_long");
 	setup_background(mlx, height, width);
 	drawing_map(mlx, mlx.map);
 	mlx_key_hook(mlx.win, genkey, &mlx);
