@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "./gnl/get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
@@ -101,7 +101,7 @@ int	check_coins(char **s)
 	}
 	if (p == 0)
 		return (printf("there is no coins in the map :(\n"), 0);
-	return (printf("check coins function is work :)\n"), 1);
+	return (p);
 }
 
 int	check_door(char **s)

@@ -5,33 +5,33 @@
 #                                                     +:+ +:+         +:+      #
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/06 09:38:18 by esalim           ###   ########.fr        #
+#    Created: 2022/10/15 12:59:48 by esalim            #+#    #+#              #
+#    Updated: 2022/10/18 18:15:58 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	so_long
-SRC		=	main2.c ./gnl/get_next_line.c ./gnl/get_next_line_utils.c move.c check_maps.c
-OBJ		=	${SRC:.c=.o}
+CFILES = ft_printf.c ft_putnbr_base.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_strchr.c
+OBJS = ${CFILES:.c=.o}
 
-CC		=	gcc
-CFLAG	=	-Wall -Werror -Wextra
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
-all		: 	$(NAME)
+NAME = libftprintf.a
+AR = ar rsc
+RM = rm
 
-$(NAME)	:	$(OBJ)
-	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	./$(NAME)
+all: $(NAME)
 
-run		:
-	./$(NAME)
+$(NAME): $(OBJS)
+	$(AR) $@ $^
 
-%.o		:	%.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $^
 
-clean	:
-	rm -rf $(OBJ)
+fclean: clean
+	$(RM) -rf $(NAME)
 
-fclean	:	clean
-	rm -rf $(NAME)
-	
+clean:
+	$(RM) -rf $(OBJS)
+
+re: fclean all
