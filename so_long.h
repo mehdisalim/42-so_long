@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/06 10:13:59 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/06 11:10:08 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_data {
 	int		ncoins;
 	int		totalcoins;
 	int		isopen;
+	void	*playerimg;
 }		t_data;
 
 char	**getfullcontent(const char *filename);

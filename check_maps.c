@@ -55,15 +55,16 @@ int	check_wall(char **content)
 			return (printf("bottom horizontal test is faild :(\n"), 0);
 		x++;
 	}
-	y = 0;
+	y = -1;
 	//check vertical line
-	while (y < ylen)
+	while (++y < ylen)
 	{
-		if (content[y++][0] != '1')
+		if (content[y][0] != '1')
 			return (printf("left vertical test is faild :(\n"), 0);
-		if (content[y][xlen - 1] != '1')
-			return (printf("right vertical test is faild :(\n"), 0);
-		y++;
+		if (content[y][xlen] != '1' && (y + 1 != ylen))
+			return (printf("%c right vertical test is faild :(\n", content[y][xlen - 1]), 0);
+		if (content[y][xlen - 1] != '1' && (y + 1 == ylen))
+			return (printf("%c right vertical test is faild :(\n", content[y][xlen - 1]), 0);
 	}
 	printf("check wall function is work :)\n");
 	return (1);
