@@ -1,7 +1,7 @@
 #include "mlx.h"
 #include "stdio.h"
 
-int	close_window(int keycode, t_data mlx)
+int close_window(int keycode, t_data mlx)
 {
 	if (keycode != 53)
 		return (0);

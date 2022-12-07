@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/06 09:38:18 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/07 11:01:41 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,10 @@ all		: 	$(NAME)
 
 $(NAME)	:	$(OBJ)
 	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	./$(NAME)
+	./$(NAME) "maps.ber"
 
 run		:
-	./$(NAME)
+	./$(NAME) "maps.ber"
 
 %.o		:	%.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
