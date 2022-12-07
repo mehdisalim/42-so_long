@@ -17,18 +17,28 @@ typedef	struct s_mlx
 }	t_mlx;
 
 
+void	setup_background(void *ptr, void *win, int height, int width)
+{	
+	int x = -50;
+	int y;
+	int s = 50;
+	while ((x += 50) < height)
+	{
+		y = -50;
+		while ((y += 50) < width)
+	  		mlx_put_image_to_window(ptr, win, mlx_xpm_file_to_image(ptr, "./assets/bg10.xpm", &s, &s), x, y);
+	}
+}
+
 int main()
 {
-	t_win	win;
-	t_mlx	mlx;
+//	t_win	win;
+//	t_mlx	mlx;
+	void	*ptr, *win, *img;
+	ptr = mlx_init();
+	win = mlx_new_window(ptr, 800, 400, "Menu");
+	setup_background(ptr, win, 800, 400);
 
-	win.height = 600;
-	win.width = 800;
-	win.title = "so_long";
-	mlx.ptr = mlx_init();
-	win.win = mlx_new_window(mlx.ptr, win.height, win.width, win.title);
-	mlx.win = win;
-	mlx_loop(mlx.ptr);
-
+	mlx_loop(ptr);
 }
 
