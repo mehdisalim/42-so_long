@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 22:21:57 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/18 17:38:16 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/09 13:34:31 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 void	ft_putstr(char *s, int *count)
 {

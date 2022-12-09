@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:18:30 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/19 16:13:11 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/09 13:34:18 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 void	ft_putnbr_base(long nbr, char *base, int islong, int *count)
 {

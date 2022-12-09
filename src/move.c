@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "../include/so_long.h"
 
 char **move_up(t_data *mlx, int i, int j)
 {

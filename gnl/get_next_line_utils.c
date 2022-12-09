@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:32:33 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/08 12:11:50 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/09 13:35:46 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 static size_t	sm_strlen(char *str)
 {

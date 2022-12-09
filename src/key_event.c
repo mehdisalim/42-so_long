@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "../include/so_long.h"
 
 char **changeplayerinmap(t_data *mlx, int direction)
 {

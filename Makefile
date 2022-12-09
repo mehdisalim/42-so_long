@@ -6,12 +6,20 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/09 13:01:33 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/09 13:43:44 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	so_long
-SRC		=	main.c ./gnl/get_next_line.c ./gnl/get_next_line_utils.c move.c check_maps.c draw_map.c key_event.c
+SRC		=	main.c \
+			./gnl/get_next_line.c \
+			./gnl/get_next_line_utils.c \
+			./src/move.c \
+			./src/check_maps.c \
+			./src/draw_map.c \
+			./src/key_event.c \
+			./src/so_long.c
+
 OBJ		=	${SRC:.c=.o}
 LIBFT	=	libft
 FT_PRINTF =	ft_printf

@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/09 13:01:49 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/09 13:25:23 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 #include <stdlib.h>
 #include <fcntl.h>
-#include "minilibx/mlx.h"
-#include "./gnl/get_next_line.h"
-#include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
+#include "../minilibx/mlx.h"
+#include "get_next_line.h"
+#include "libft.h"
+#include "ft_printf.h"
 
 typedef struct s_door_coord
 {
@@ -40,6 +40,7 @@ typedef struct s_data {
 	t_door_coord	door;
 }		t_data;
 
+void	so_long(char *map);
 char	**getfullcontent(const char *filename);
 int		doublestrlen(char	**s);
 int		check_size(char	**s);
