@@ -6,13 +6,13 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:32:33 by esalim            #+#    #+#             */
-/*   Updated: 2022/11/03 16:46:05 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/08 12:11:50 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	ft_strlen(char *str)
+static size_t	sm_strlen(char *str)
 {
 	int	length;
 
@@ -22,7 +22,7 @@ static size_t	ft_strlen(char *str)
 	return (length);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*sm_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -36,17 +36,17 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *lstr, char *buff)
+char	*sm_strjoin(char *lstr, char *buff)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
 	if (!lstr)
-		return (ft_strdup(buff));
+		return (sm_strdup(buff));
 	if (!lstr || !buff)
 		return (NULL);
-	str = malloc(ft_strlen(lstr) + ft_strlen(buff) + 1);
+	str = malloc(sm_strlen(lstr) + sm_strlen(buff) + 1);
 	if (!str)
 		return (NULL);
 	i = -1;
@@ -60,7 +60,7 @@ char	*ft_strjoin(char *lstr, char *buff)
 	return (str);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*sm_substr(char *s, unsigned int start, size_t len)
 {
 	char	*d;
 	size_t	slen;
@@ -69,13 +69,13 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	i = -1;
 	if (!s || !*s)
 		return (0);
-	slen = ft_strlen(s);
+	slen = sm_strlen(s);
 	if (len > slen)
 		len = slen;
 	d = (char *)malloc(len + 1);
 	if (!d)
 		return (0);
-	if (start < ft_strlen(s))
+	if (start < sm_strlen(s))
 	{
 		while (s[++i] && len--)
 			d[i] = s[i];
@@ -84,14 +84,14 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (d);
 }
 
-char	*ft_strdup(char *s1)
+char	*sm_strdup(char *s1)
 {
 	char	*dest;
 	size_t	len;
 	int		i;
 
 	i = -1;
-	len = ft_strlen((char *)s1) + 1;
+	len = sm_strlen((char *)s1) + 1;
 	dest = (char *)malloc(len);
 	if (!dest)
 		return (0);

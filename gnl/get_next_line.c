@@ -6,39 +6,39 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:24:42 by esalim            #+#    #+#             */
-/*   Updated: 2022/11/03 14:32:27 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/08 12:11:16 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_getline(char *str)
+char	*sm_getline(char *str)
 {
 	char	*newline;
 
-	newline = ft_strchr(str, '\n');
+	newline = sm_strchr(str, '\n');
 	if (!str[0])
 		return (NULL);
 	if (!newline)
-		return (ft_strdup(str));
-	return (ft_substr(str, 0, newline - str + 1));
+		return (sm_strdup(str));
+	return (sm_substr(str, 0, newline - str + 1));
 }
 
-char	*ft_getbuffer(char *line)
+char	*sm_getbuffer(char *line)
 {
 	char	*buff;
 	char	*newline;
 
-	newline = ft_strchr(line, '\n');
+	newline = sm_strchr(line, '\n');
 	if (!newline)
 		return (free(line), NULL);
 	if (*(++newline))
 	{
-		buff = ft_strdup(newline);
+		buff = sm_strdup(newline);
 		free(line);
 		return (buff);
 	}
-	return (free(line), ft_strdup(""));
+	return (free(line), sm_strdup(""));
 }
 
 char	*get_next_line(int fd)
@@ -57,11 +57,11 @@ char	*get_next_line(int fd)
 		if (n == -1)
 			n = 0;
 		buff[n] = '\0';
-		str = ft_strjoin(str, buff);
-		if (ft_strchr(buff, '\n'))
+		str = sm_strjoin(str, buff);
+		if (sm_strchr(buff, '\n'))
 			break ;
 	}
-	line = ft_getline(str);
-	str = ft_getbuffer(str);
+	line = sm_getline(str);
+	str = sm_getbuffer(str);
 	return (line);
 }

@@ -1,10 +1,56 @@
-#include "mlx.h"
-#include "stdio.h"
+#include "so_long.h"
 
-int close_window(int keycode, t_data mlx)
+char **changeplayerinmap(t_data *mlx, int direction)
 {
-	if (keycode != 53)
-		return (0);
-	mlx_destroy_window(mlx.ptr, mlx.win);
-	exit(1);
+	int i = -1, j;
+	int q = 50;
+	static	int movecounter;
+
+	while (mlx->map[++i])
+	{
+		j = -1;
+		while (mlx->map[i][++j])
+		{
+			if (mlx->map[i][j] == 'P' && (direction == 13 || direction == 126) && mlx->map[i - 1][j] != '1')
+			{
+				mlx->playerimg = mlx_xpm_file_to_image(mlx->ptr, "./assets/elf3.xpm", &q, &q);
+				display_counter(mlx, ++movecounter, "  move up");
+				return (ft_printf("%d ==> move to top\n", movecounter), move_up(mlx, i, j));
+			}
+			if (mlx->map[i][j] == 'P' && (direction == 0 || direction == 123) && mlx->map[i][j - 1] != '1')
+			{
+				mlx->playerimg = mlx_xpm_file_to_image(mlx->ptr, "./assets/elf0.xpm", &q, &q);
+				display_counter(mlx, ++movecounter, "  move left");
+				return (ft_printf("%d ==> move to left\n", movecounter), move_left(mlx, i, j));
+			}
+			if (mlx->map[i][j] == 'P' && (direction == 1 || direction == 125) && mlx->map[i + 1][j] != '1')
+			{
+				mlx->playerimg = mlx_xpm_file_to_image(mlx->ptr, "./assets/elf3.xpm", &q, &q);
+				display_counter(mlx, ++movecounter, "  move down");
+				return (ft_printf("%d ==> move to down\n", movecounter), move_down(mlx, i, j));
+			}
+			if (mlx->map[i][j] == 'P' && (direction == 2 || direction == 124) && mlx->map[i][j + 1] != '1')
+			{
+				mlx->playerimg = mlx_xpm_file_to_image(mlx->ptr, "./assets/elf3.xpm", &q, &q);
+				display_counter(mlx, ++movecounter, "  move right");
+				return (ft_printf("%d ==> move to right\n", movecounter), move_right(mlx, i, j));
+			}
+		}
+	}
+	return (mlx->map);
+}
+
+int genkey(int key, t_data *mlx)
+{
+	if (key == 53)
+	{
+		mlx_destroy_window(mlx->ptr, mlx->win);
+		exit(0);
+	}
+	if ((key >= 0 && key < 3)  || (key >= 123 && key <= 126) || key == 13)
+	{
+		mlx->map = changeplayerinmap(mlx, key);
+		drawing_map(mlx);
+	}
+	return (0);
 }

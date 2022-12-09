@@ -1,7 +1,4 @@
-#include "./gnl/get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <string.h>
+#include "so_long.h"
 
 int doublestrlen(char **s)
 {
@@ -20,19 +17,19 @@ int check_size(char **s)
 	{
 		if (!len)
 		{
-			len = strlen(s[i]);
+			len = ft_strlen(s[i]);
 			continue;
 		}
-		if (!strchr(s[i], '\n'))
+		if (!ft_strchr(s[i], '\n'))
 		{
-			if (len != strlen(s[i]) + 1)
-				return (printf("the size is not the same (without /\n) :o\n"), 0);
+			if (len != ft_strlen(s[i]) + 1)
+				return (ft_printf("the size is not the same (without /\n) :o\n"), 0);
 			return (1);
 		}
-		else if (len != strlen(s[i]))
-			return (printf("the size is not the same :o\n"), 0);
+		else if (len != ft_strlen(s[i]))
+			return (ft_printf("the size is not the same :o\n"), 0);
 	}
-	printf("check size function is work :)\n");
+	ft_printf("check size function is work :)\n");
 	return (1);
 }
 
@@ -41,18 +38,18 @@ int check_wall(char **content)
 
 	int x = 0;
 	int y = 0;
-	int xlen = strlen(content[y]) - 1;
+	int xlen = ft_strlen(content[y]) - 1;
 	int ylen = doublestrlen(content);
 
 	//check horizontal line
 	while (x < xlen)
 	{
-		if (!strchr(content[ylen - 1], '\n') && !x)
+		if (!ft_strchr(content[ylen - 1], '\n') && !x)
 			xlen -= 1;
 		if (content[0][x] != '1')
-			return (printf("top horizontal test is faild :(\n"), 0);
+			return (ft_printf("top horizontal test is faild :(\n"), 0);
 		if (content[ylen - 1][x] != '1')
-			return (printf("bottom horizontal test is faild :(\n"), 0);
+			return (ft_printf("bottom horizontal test is faild :(\n"), 0);
 		x++;
 	}
 	y = -1;
@@ -60,13 +57,13 @@ int check_wall(char **content)
 	while (++y < ylen)
 	{
 		if (content[y][0] != '1')
-			return (printf("left vertical test is faild :(\n"), 0);
+			return (ft_printf("left vertical test is faild :(\n"), 0);
 		if (content[y][xlen] != '1' && (y == ylen))
-			return (printf("%c right vertical test is faild :(\n", content[y][xlen - 1]), 0);
+			return (ft_printf("%c right vertical test is faild :(\n", content[y][xlen - 1]), 0);
 		if (content[y][xlen - 1] != '1' && (y + 1 == ylen))
-			return (printf("%c right 2 vertical test is faild :(\n", content[y][xlen - 1]), 0);
+			return (ft_printf("%c right 2 vertical test is faild :(\n", content[y][xlen - 1]), 0);
 	}
-	printf("check wall function is work :)\n");
+	ft_printf("check wall function is work :)\n");
 	return (1);
 }
 
@@ -83,8 +80,8 @@ int check_players(char **s)
 				p++;
 	}
 	if (p == 1)
-		return (printf("check players function is work :)\n"), 1);
-	return (printf("there is no (or multi) players in the map :(\n"), 0);
+		return (ft_printf("check players function is work :)\n"), 1);
+	return (ft_printf("there is no (or multi) players in the map :(\n"), 0);
 }
 
 int check_coins(char **s)
@@ -100,7 +97,7 @@ int check_coins(char **s)
 				p++;
 	}
 	if (p == 0)
-		return (printf("there is no coins in the map :(\n"), 0);
+		return (ft_printf("there is no coins in the map :(\n"), 0);
 	return (p);
 }
 
@@ -117,8 +114,8 @@ int check_door(char **s)
 				p++;
 	}
 	if (p == 1)
-		return (printf("check door function is work :)\n"), 1);
-	return (printf("there is no (or multi) door in the map :(\n"), 0);
+		return (ft_printf("check door function is work :)\n"), 1);
+	return (ft_printf("there is no (or multi) door in the map :(\n"), 0);
 }
 
 int check_invalid_char(char **s)
@@ -129,10 +126,10 @@ int check_invalid_char(char **s)
 	{
 		j = -1;
 		while (s[i][++j])
-			if (s[i][j] != 'P' && s[i][j] != 'E' && s[i][j] != '1' && s[i][j] != '0' && s[i][j] != 'C' && s[i][j] != '\n')
-				return (printf("there is invalid characters in the map :( in %d -- %d ==> %c\n", i + 1, j + 1, s[i][j]), 0);
+			if (!ft_strchr("E01PC\n", s[i][j]))
+				return (ft_printf("there is invalid characters in the map :( in %d -- %d ==> %c\n", i + 1, j + 1, s[i][j]), 0);
 	}
-	return (printf("check players function is work :)\n"), 1);
+	return (ft_printf("check players function is work :)\n"), 1);
 }
 
 int check_condition(char **s)
@@ -148,10 +145,10 @@ int check_condition(char **s)
 		{
 			if (s[i][j] == 'C' || s[i][j] == 'P' || s[i][j] == 'E')
 				if (s[i - 1][j] == '1' && s[i + 1][j] == '1' && s[i][j - 1] == '1' && s[i][j + 1] == '1')
-					return (printf("the condition is inside wall :(\n"), 0);
+					return (ft_printf("the condition is inside wall :(\n"), 0);
 		}
 	}
-	return (printf("check condition function is work :)\n"), 1);
+	return (ft_printf("check condition function is work :)\n"), 1);
 }
 
 int getnumberoflines(const char *filename)
@@ -167,7 +164,7 @@ int getnumberoflines(const char *filename)
 		i++;
 	}
 	close(fd);
-	printf("number of lines is : %d\n", i);
+	ft_printf("number of lines is : %d\n", i);
 	return (i);
 }
 
@@ -195,9 +192,9 @@ char **getfullcontent(const char *filename)
 //		return (0);
 //	if (!check_size(content) || !check_wall(content) || !check_players(content) || !check_invalid_char(content)
 //			|| !check_door(content) || !check_coins(content) || !check_condition(content))
-//		printf("test faild :(\n");
+//		ft_printf("test faild :(\n");
 //	else
-//		printf("test is passed :)\n");
+//		ft_printf("test is passed :)\n");
 //	free(content);
 //	return 0;
 //}

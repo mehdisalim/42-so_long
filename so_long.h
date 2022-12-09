@@ -6,18 +6,19 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/06 11:10:08 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/08 16:39:18 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include "minilibx/mlx.h"
 #include "./gnl/get_next_line.h"
+#include "./libft/libft.h"
+#include "./ft_printf/ft_printf.h"
 
 typedef struct s_door_coord
 {
@@ -29,10 +30,14 @@ typedef struct s_data {
 	void	*ptr;
 	void	*win;
 	char	**map;
+	int		height;
+	int		width;
 	int		ncoins;
 	int		totalcoins;
 	int		isopen;
 	void	*playerimg;
+	int		movecounter;
+	t_door_coord	door;
 }		t_data;
 
 char	**getfullcontent(const char *filename);
@@ -45,9 +50,13 @@ int		check_coins(char	**s);
 int		check_invalid_char(char	**s);
 int		check_condition(char	**s);
 
-char	**move_down(t_data	*mlx, t_door_coord *door, int i, int j);
-char	**move_up(t_data	*mlx, t_door_coord *door, int i, int j);
-char	**move_left(t_data	*mlx, t_door_coord *door, int i, int j);
-char	**move_right(t_data	*mlx, t_door_coord *door, int i, int j);
+int		genkey(int key, t_data *mlx);
+void	display_counter(t_data	*mlx, int movecounter, char	*s);
+void	drawing_map(t_data *mlx);
+
+char	**move_down(t_data	*mlx, int i, int j);
+char	**move_up(t_data	*mlx, int i, int j);
+char	**move_left(t_data	*mlx, int i, int j);
+char	**move_right(t_data	*mlx, int i, int j);
 
 #endif
