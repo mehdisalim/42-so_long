@@ -126,7 +126,7 @@ int check_invalid_char(char **s)
 	{
 		j = -1;
 		while (s[i][++j])
-			if (!ft_strchr("E01PC\n", s[i][j]))
+			if (!ft_strchr("E01PCX\n", s[i][j]))
 				return (ft_printf("there is invalid characters in the map :( in %d -- %d ==> %c\n", i + 1, j + 1, s[i][j]), 0);
 	}
 	return (ft_printf("check players function is work :)\n"), 1);

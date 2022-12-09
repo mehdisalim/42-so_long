@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/09 13:25:23 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/09 17:01:39 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		check_coins(char	**s);
 int		check_invalid_char(char	**s);
 int		check_condition(char	**s);
 
-int		genkey(int key, t_data *mlx);
+int		key_hook(int key, t_data *mlx);
 void	display_counter(t_data	*mlx, int movecounter, char	*s);
 void	drawing_map(t_data *mlx);
 

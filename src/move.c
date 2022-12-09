@@ -11,6 +11,11 @@ char **move_up(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i - 1][j] == 'C')
 		mlx->ncoins += 1;
+	if (mlx->map[i - 1][j] == 'X')
+	{
+		ft_printf(" ====== you lose !! ======");
+		exit(0);
+	}
 	mlx->map[i - 1][j] = 'P';
 	if (mlx->door.xdoor == i && mlx->door.ydoor == j)
 		mlx->map[mlx->door.xdoor][mlx->door.ydoor] = 'E';
@@ -30,6 +35,11 @@ char **move_down(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i + 1][j] == 'C')
 		mlx->ncoins += 1;
+	if (mlx->map[i + 1][j] == 'X')
+	{
+		ft_printf(" ====== you lose !! ======");
+		exit(0);
+	}
 	mlx->map[i + 1][j] = 'P';
 	if (mlx->door.xdoor == i && mlx->door.ydoor == j)
 		mlx->map[mlx->door.xdoor][mlx->door.ydoor] = 'E';
@@ -49,6 +59,11 @@ char **move_right(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i][j + 1] == 'C')
 		mlx->ncoins += 1;
+	if (mlx->map[i][j + 1] == 'X')
+	{
+		ft_printf(" ====== you lose !! ======");
+		exit(0);
+	}
 	mlx->map[i][j + 1] = 'P';
 	if (mlx->door.xdoor == i && mlx->door.ydoor == j)
 		mlx->map[mlx->door.xdoor][mlx->door.ydoor] = 'E';
@@ -68,6 +83,11 @@ char **move_left(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i][j - 1] == 'C')
 		mlx->ncoins += 1;
+	if (mlx->map[i][j - 1] == 'X')
+	{
+		ft_printf(" ====== you lose !! ======");
+		exit(0);
+	}
 	mlx->map[i][j - 1] = 'P';
 	if (mlx->door.xdoor == i && mlx->door.ydoor == j)
 		mlx->map[mlx->door.xdoor][mlx->door.ydoor] = 'E';
