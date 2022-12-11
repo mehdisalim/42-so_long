@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:24:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/09 22:02:10 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/11 20:24:30 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	display_counter(t_data	*mlx, int movecounter, char	*s)
 	free(coin);
 }
 
-void	checker_cond(t_data *mlx, char c, int x, int y)
+static void	checker_cond(t_data *mlx, char c, int x, int y)
 {
 	int	i;
 
