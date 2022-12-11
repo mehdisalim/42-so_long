@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/09 13:43:44 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/11 12:03:08 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,11 @@ SRC		=	main.c \
 			./gnl/get_next_line.c \
 			./gnl/get_next_line_utils.c \
 			./src/move.c \
-			./src/check_maps.c \
+			./src/check_map.c \
+			./src/check_map2.c \
 			./src/draw_map.c \
 			./src/key_event.c \
+			./src/read_map.c \
 			./src/so_long.c
 
 OBJ		=	${SRC:.c=.o}
@@ -32,10 +34,10 @@ $(NAME)	:	$(OBJ)
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
 	$(CC) $(OBJ) libft.a libftprintf.a  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	./$(NAME) "maps.ber"
+	./$(NAME) "maps/maps.ber"
 
 run		:
-	./$(NAME) "maps.ber"
+	./$(NAME) "maps/maps.ber"
 
 %.o		:	%.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@

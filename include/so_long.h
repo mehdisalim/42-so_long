@@ -6,37 +6,37 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/09 17:01:39 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/09 18:25:33 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <stdlib.h>
-#include <fcntl.h>
-#include "../minilibx/mlx.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include "ft_printf.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include "../minilibx/mlx.h"
+# include "get_next_line.h"
+# include "libft.h"
+# include "ft_printf.h"
 
 typedef struct s_door_coord
 {
-	int xdoor;
+	int	xdoor;
 	int	ydoor;
 }	t_door_coord;
 
 typedef struct s_data {
-	void	*ptr;
-	void	*win;
-	char	**map;
-	int		height;
-	int		width;
-	int		ncoins;
-	int		totalcoins;
-	int		isopen;
-	void	*playerimg;
-	int		movecounter;
+	void			*ptr;
+	void			*win;
+	char			**map;
+	int				height;
+	int				width;
+	int				ncoins;
+	int				totalcoins;
+	int				isopen;
+	void			*playerimg;
+	int				movecounter;
 	t_door_coord	door;
 }		t_data;
 
