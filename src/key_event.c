@@ -6,20 +6,20 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:15:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/09 19:59:03 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/12 16:40:05 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	checker(t_data *mlx, int *movecounter, char *imgname, char *direction)
+static void	checker(t_data *mlx, int *movecounter, char *imgname, char *dir)
 {
 	int	q;
 
 	q = 50;
-	mlx->playerimg = mlx_xpm_file_to_image(mlx->ptr, imgname, &q, &q);
-	display_counter(mlx, ++(*movecounter), direction);
-	ft_printf("%d ==> %s\n", *movecounter, direction);
+	mlx->imgs.player = mlx_xpm_file_to_image(mlx->ptr, imgname, &q, &q);
+	display_counter(mlx, ++(*movecounter), dir);
+	ft_printf("%d ==> %s\n", *movecounter, dir);
 }
 
 static char	**getmap(t_data *mlx, int *mc, int dir, int i)
@@ -52,13 +52,12 @@ static char	**getmap(t_data *mlx, int *mc, int dir, int i)
 char	**changeplayerinmap(t_data *mlx, int dir)
 {
 	int			i;
-	static int	mc;
 	char		**map;
 
 	i = -1;
 	while (mlx->map[++i])
 	{
-		map = getmap(mlx, &mc, dir, i);
+		map = getmap(mlx, &mlx->movecounter, dir, i);
 		if (map)
 			return (map);
 	}
@@ -67,6 +66,8 @@ char	**changeplayerinmap(t_data *mlx, int dir)
 
 int	key_hook(int key, t_data *mlx)
 {
+	
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.bg, 0,0);
 	if (key == 53)
 	{
 		mlx_clear_window(mlx->ptr, mlx->win);
@@ -76,6 +77,8 @@ int	key_hook(int key, t_data *mlx)
 	if ((key >= 0 && key < 3) || (key >= 123 && key <= 126) || key == 13)
 	{
 		mlx->map = changeplayerinmap(mlx, key);
+		if (!mlx->map)
+			exit(0);
 		drawing_map(mlx);
 	}
 	return (0);

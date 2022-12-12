@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/11 20:24:25 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/12 16:39:39 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,20 @@ typedef struct s_door_coord
 	int	ydoor;
 }	t_door_coord;
 
-typedef struct s_data {
+typedef struct	s_imgs
+{
+	void	*bg;
+	void	*doorclose;
+	void	*dooropen;
+	void	*player;
+	void	*coins;
+	void	*enemy;
+	void	*wall;
+}	t_imgs;
+
+typedef struct s_data
+{
+	void			*img;
 	void			*ptr;
 	void			*win;
 	char			**map;
@@ -37,6 +50,7 @@ typedef struct s_data {
 	int				isopen;
 	void			*playerimg;
 	int				movecounter;
+	t_imgs			imgs;
 	t_door_coord	door;
 }		t_data;
 

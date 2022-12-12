@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/11 16:48:41 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/12 16:40:45 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,9 @@ static void	getdoor_coord(t_data	*mlx)
 	}
 }
 
-static void	setup_background(t_data mlx, int height, int width)
-{
-	int	x;
-	int	y;
-	int	s;
-
-	s = 50;
-	x = 0;
-	while (x < height)
-	{
-		y = 0;
-		while (y < width)
-		{
-			mlx_put_image_to_window(mlx.ptr, mlx.win,
-				mlx_xpm_file_to_image(mlx.ptr,
-					"./assets/background/bg.xpm", &s, &s), x, y);
-			y += 50;
-		}
-		x += 50;
-	}
-}
-
 static t_data	init(char *filename)
 {
 	t_data	mlx;
-	int		a;
 
 	if (!ft_strnstr(filename, ".ber", ft_strlen(filename)))
 	{
@@ -74,9 +51,15 @@ static t_data	init(char *filename)
 	mlx.movecounter = 0;
 	mlx.win = mlx_new_window(mlx.ptr, mlx.height, mlx.width, "so_long");
 	mlx.ncoins = 0;
-	a = 50;
-	mlx.playerimg = mlx_xpm_file_to_image(mlx.ptr,
-			"./assets/P/elf0.xpm", &a, &a);
+	int a = 50;
+
+	mlx.imgs.bg = mlx_xpm_file_to_image(mlx.ptr, "./assets/background/bg.xpm", &a, &a);
+	mlx.imgs.player = mlx_xpm_file_to_image(mlx.ptr, "./assets/P/elf0.xpm", &a, &a);
+	mlx.imgs.coins = mlx_xpm_file_to_image(mlx.ptr, "./assets/C/coin1.xpm", &a, &a);
+	mlx.imgs.wall = mlx_xpm_file_to_image(mlx.ptr, "./assets/1/tree.xpm", &a, &a);
+	mlx.imgs.dooropen = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/dooropen.xpm", &a, &a);
+	mlx.imgs.doorclose = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/door.xpm", &a, &a);
+	mlx.imgs.enemy = mlx_xpm_file_to_image(mlx.ptr, "./assets/X/enemy.xpm", &a, &a);
 	getdoor_coord(&mlx);
 	return (mlx);
 }
@@ -95,7 +78,7 @@ void	so_long(char *map)
 		|| !mlx.totalcoins
 		|| !check_condition(mlx.map))
 		exit(0);
-	setup_background(mlx, mlx.height, mlx.width);
+	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0,0);
 	drawing_map(&mlx);
 	display_counter(&mlx, 0, " ");
 	mlx_key_hook(mlx.win, key_hook, &mlx);
