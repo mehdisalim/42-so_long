@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 12:59:48 by esalim            #+#    #+#              #
-#    Updated: 2022/12/09 13:48:09 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/13 12:08:23 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJS = ${CFILES:.c=.o}
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
-NAME = ../libftprintf.a
+NAME = ../libs/libftprintf.a
 AR = ar rsc
 RM = rm
 

@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/12 15:42:09 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/13 12:12:45 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ all		: 	$(NAME)
 $(NAME)	:	$(OBJ)
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
-	$(CC) $(OBJ) libft.a libftprintf.a  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJ) libs/libft.a libs/libftprintf.a  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	./$(NAME) "maps/map1.ber"
 
 run		:
@@ -48,6 +48,6 @@ clean	:
 	rm -rf $(OBJ)
 
 fclean	:	clean
-	rm -rf $(NAME) libftprintf.a libft.a
+	rm -rf $(NAME) libs/libftprintf.a libs/libft.a
 
 re		:	fclean all

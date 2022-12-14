@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/12 16:40:45 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:58:56 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,32 @@ static void	getdoor_coord(t_data	*mlx)
 	}
 }
 
+void	setup_background(t_data mlx)
+{
+	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0,0);
+	if (mlx.height > 5120 || mlx.width > 2880)
+	{
+		ft_printf("Error: size is too large.\n");
+		exit(1);
+	}
+	int h = 1200;
+	int w = 1650;
+	ft_printf("%d ===> %d \n", mlx.height, mlx.width);
+	while (h < mlx.height || w < mlx.height)
+	{
+		if (mlx.height >= h)
+			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, w, 0);
+		if (mlx.width >=  w)
+			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, h);
+		if (mlx.height > h && mlx.width >  w)
+			mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, w, h);
+		h += 1200;
+		w += 1650;
+	}
+	
+	
+}
+
 static t_data	init(char *filename)
 {
 	t_data	mlx;
@@ -51,7 +77,7 @@ static t_data	init(char *filename)
 	mlx.movecounter = 0;
 	mlx.win = mlx_new_window(mlx.ptr, mlx.height, mlx.width, "so_long");
 	mlx.ncoins = 0;
-	int a = 50;
+	int a = 0;
 
 	mlx.imgs.bg = mlx_xpm_file_to_image(mlx.ptr, "./assets/background/bg.xpm", &a, &a);
 	mlx.imgs.player = mlx_xpm_file_to_image(mlx.ptr, "./assets/P/elf0.xpm", &a, &a);
@@ -78,7 +104,7 @@ void	so_long(char *map)
 		|| !mlx.totalcoins
 		|| !check_condition(mlx.map))
 		exit(0);
-	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0,0);
+	setup_background(mlx);
 	drawing_map(&mlx);
 	display_counter(&mlx, 0, " ");
 	mlx_key_hook(mlx.win, key_hook, &mlx);

@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:15:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/12 16:40:05 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:11:36 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static void	checker(t_data *mlx, int *movecounter, char *imgname, char *dir)
 	int	q;
 
 	q = 50;
+	mlx_destroy_image(mlx->ptr, mlx->imgs.player);
+	mlx_clear_window(mlx->ptr, mlx->win);
+	setup_background(*mlx);
 	mlx->imgs.player = mlx_xpm_file_to_image(mlx->ptr, imgname, &q, &q);
 	display_counter(mlx, ++(*movecounter), dir);
 	ft_printf("%d ==> %s\n", *movecounter, dir);
@@ -33,15 +36,15 @@ static char	**getmap(t_data *mlx, int *mc, int dir, int i)
 			&& mlx->map[i - 1][j] != '1')
 			return (checker(mlx, mc, "./assets/P/elf0.xpm", "  move up"),
 				move_up(mlx, i, j));
-		if (mlx->map[i][j] == 'P' && (dir == 0 || dir == 123)
+		else if (mlx->map[i][j] == 'P' && (dir == 0 || dir == 123)
 			&& mlx->map[i][j - 1] != '1')
 			return (checker(mlx, mc, "./assets/P/elf1.xpm", "  move left"),
 				move_left(mlx, i, j));
-		if (mlx->map[i][j] == 'P' && (dir == 1 || dir == 125)
+		else if (mlx->map[i][j] == 'P' && (dir == 1 || dir == 125)
 			&& mlx->map[i + 1][j] != '1')
 			return (checker(mlx, mc, "./assets/P/elf0.xpm", "  move down"),
 				move_down(mlx, i, j));
-		if (mlx->map[i][j] == 'P' && (dir == 2 || dir == 124)
+		else if (mlx->map[i][j] == 'P' && (dir == 2 || dir == 124)
 			&& mlx->map[i][j + 1] != '1')
 			return (checker(mlx, mc, "./assets/P/elf0.xpm", "  move right"),
 				move_right(mlx, i, j));
@@ -66,8 +69,6 @@ char	**changeplayerinmap(t_data *mlx, int dir)
 
 int	key_hook(int key, t_data *mlx)
 {
-	
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.bg, 0,0);
 	if (key == 53)
 	{
 		mlx_clear_window(mlx->ptr, mlx->win);

@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:24:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/12 16:41:57 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:52:50 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,8 @@ void	display_counter(t_data	*mlx, int movecounter, char	*s)
 	string = ft_strjoin(mc, s);
 	nc = ft_itoa(mlx->ncoins);
 	coin = ft_strjoin(nc, "  coins");
-	// if (movecounter != 0)
-	// {
-	// 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx_xpm_file_to_image(
-	// 			mlx->ptr, "./assets/background/bg.xpm", &i, &i), 0, 0);
-	// 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx_xpm_file_to_image(
-	// 			mlx->ptr, "./assets/background/bg.xpm", &i, &i),
-	// 		mlx->height - 100, 0);
-	// }
-	mlx_string_put(mlx->ptr, mlx->win, 10, 10, 0x000000, string);
-	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 100, 10, 0x000000, coin);
+	mlx_string_put(mlx->ptr, mlx->win, 10, 10, 0xffffff, string);
+	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 100, 10, 0xffffff, coin);
 	free(mc);
 	free(nc);
 	free(string);

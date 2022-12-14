@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/12 16:39:39 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/12 20:43:19 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_data
 }		t_data;
 
 void	so_long(char *map);
+void	setup_background(t_data mlx);
 char	**getfullcontent(const char *filename);
 int		doublestrlen(char	**s);
 int		check_size(char	**s);
