@@ -6,22 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:24:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/14 10:52:50 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/15 17:14:52 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-// static char	*getrandomcoin(int index)
-// {
-// 	if (index == 0 || index == 4 || index == 8)
-// 		return ("./assets/C/coin1.xpm");
-// 	if (index == 1 || index == 5)
-// 		return ("./assets/C/coin2.xpm");
-// 	if (index == 2 || index == 6 || index == 9)
-// 		return ("./assets/C/coin3.xpm");
-// 	return ("./assets/C/coin4.xpm");
-// }
 
 static void	checker_cond(t_data *mlx, char c, int x, int y)
 {
@@ -35,29 +24,32 @@ static void	checker_cond(t_data *mlx, char c, int x, int y)
 	if (c == 'C')
 		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.coins, y, x);
 	if (c == 'X')
-		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.enemy, y, x);
-	// if (c == '0')
-	// 	mlx_put_image_to_window(mlx->ptr, mlx->win,
-	// 		mlx_xpm_file_to_image(mlx->ptr, "./assets/background/bg.xpm",
-	// 			&i, &i), y, x);
+		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.enemy.img0, y, x);
 }
 
 void	display_counter(t_data	*mlx, int movecounter, char	*s)
 {
 	int		i;
 	char	*mc;
+	char	*tc;
 	char	*string;
 	char	*nc;
 	char	*coin;
 
 	i = 0;
 	mc = ft_itoa(movecounter);
+	tc = ft_itoa(mlx->totalcoins);
 	string = ft_strjoin(mc, s);
 	nc = ft_itoa(mlx->ncoins);
-	coin = ft_strjoin(nc, "  coins");
-	mlx_string_put(mlx->ptr, mlx->win, 10, 10, 0xffffff, string);
-	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 100, 10, 0xffffff, coin);
+	coin = ft_strjoin(nc, "/");
+	free(nc);
+	nc = ft_strjoin(coin, tc);
+	free(coin);
+	coin = ft_strjoin(nc, " coins");
+	mlx_string_put(mlx->ptr, mlx->win, 10, 10, 0x000000, string);
+	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 110, 10, 0x000000, coin);
 	free(mc);
+	free(tc);
 	free(nc);
 	free(string);
 	free(coin);
@@ -69,12 +61,18 @@ void	put_img(t_data *mlx, const char c, int x, int y)
 	int					i;
 
 	i = 50;
+	if (!mlx->nextlevel)
+	{
+		door.xdoor = 0;
+		door.ydoor = 0;
+	}
 	if (c == 'E')
 	{
 		if (!door.xdoor || !door.ydoor)
 		{
 			door.xdoor = x;
 			door.ydoor = y;
+			mlx->nextlevel = 1;
 		}
 		if (mlx->ncoins == mlx->totalcoins)
 		{

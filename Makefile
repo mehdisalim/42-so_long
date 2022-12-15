@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/13 12:12:45 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/15 19:15:02 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ SRC		=	main.c \
 			./src/draw_map.c \
 			./src/key_event.c \
 			./src/read_map.c \
-			./src/so_long.c
+			./src/so_long.c \
+			./src/loop_hook.c \
+			./src/init_list.c \
+			./src/move_enemy.c
 
 OBJ		=	${SRC:.c=.o}
 LIBFT	=	libft
@@ -34,10 +37,10 @@ $(NAME)	:	$(OBJ)
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
 	$(CC) $(OBJ) libs/libft.a libs/libftprintf.a  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	./$(NAME) "maps/map1.ber"
+	./$(NAME) "maps/map2.ber"
 
 run		:
-	./$(NAME) "maps/map1.ber"
+	./$(NAME) "maps/map2.ber"
 
 %.o		:	%.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
