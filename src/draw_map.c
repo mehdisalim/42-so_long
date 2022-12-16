@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:24:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/15 17:14:52 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/16 16:59:58 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	display_counter(t_data	*mlx, int movecounter, char	*s)
 	nc = ft_strjoin(coin, tc);
 	free(coin);
 	coin = ft_strjoin(nc, " coins");
-	mlx_string_put(mlx->ptr, mlx->win, 10, 10, 0x000000, string);
-	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 110, 10, 0x000000, coin);
+	mlx_string_put(mlx->ptr, mlx->win, 10, 10, 0xffffff, string);
+	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 110, 10, 0xffffff, coin);
 	free(mc);
 	free(tc);
 	free(nc);

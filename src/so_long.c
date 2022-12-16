@@ -6,31 +6,31 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/16 14:33:40 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/16 19:34:48 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-// static void	getdoor_coord(t_data	*mlx)
-// {
-// 	int		i;
-// 	int		j;
+static void	getdoor_coord(t_data	*mlx)
+{
+	int		i;
+	int		j;
 
-// 	i = -1;
-// 	while (mlx->map[++i])
-// 	{
-// 		j = -1;
-// 		while (mlx->map[i][++j])
-// 		{
-// 			if (mlx->map[i][j] == 'E')
-// 			{
-// 				mlx->door.xdoor = i;
-// 				mlx->door.ydoor = j;
-// 			}
-// 		}
-// 	}
-// }
+	i = -1;
+	while (mlx->map[++i])
+	{
+		j = -1;
+		while (mlx->map[i][++j])
+		{
+			if (mlx->map[i][j] == 'E')
+			{
+				mlx->door.xdoor = i;
+				mlx->door.ydoor = j;
+			}
+		}
+	}
+}
 
 void	display_linkedlist(t_data mlx)
 {
@@ -70,7 +70,7 @@ static char	*getrandomcoin(int index)
 
 void	setup_background(t_data mlx)
 {
-	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0,0);
+	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 50);
 	if (mlx.height > 5120 || mlx.width > 2880)
 	{
 		ft_printf("Error: size is too large.\n");
@@ -135,7 +135,7 @@ static t_data	init(char *filename)
 	mlx.imgs.dooropen = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/dooropen.xpm", &a, &a);
 	mlx.imgs.doorclose = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/door.xpm", &a, &a);
 	getenemyimages(&mlx);
-	// getdoor_coord(&mlx);
+	getdoor_coord(&mlx);
 	return (mlx);
 }
 
