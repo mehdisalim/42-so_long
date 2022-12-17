@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/16 19:34:48 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 18:57:33 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,6 @@ static void	getdoor_coord(t_data	*mlx)
 				mlx->door.ydoor = j;
 			}
 		}
-	}
-}
-
-void	display_linkedlist(t_data mlx)
-{
-	t_linkedlist lst = init_lists(mlx.map);
-	while (lst.enemy)
-	{
-		ft_printf("Enemy (%c) :  x ===> %d  y ===> %d \n", lst.enemy->content.c, lst.enemy->content.x, lst.enemy->content.y);
-		lst.enemy = lst.enemy->next;
-	}
-	while (lst.player)
-	{
-		ft_printf("Player (%c) :  x ===> %d  y ===> %d \n", lst.player->content.c, lst.player->content.x, lst.player->content.y);
-		lst.player = lst.player->next;
-	}
-	while (lst.coins)
-	{
-		ft_printf("Coins (%c) :  x ===> %d  y ===> %d \n", lst.coins->content.c, lst.coins->content.x, lst.coins->content.y);
-		lst.coins = lst.coins->next;
-	}
-	while (lst.door)
-	{
-		ft_printf("Door (%c) :  x ===> %d  y ===> %d \n", lst.door->content.c, lst.door->content.x, lst.door->content.y);
-		lst.door = lst.door->next;
 	}
 }
 
@@ -134,6 +109,7 @@ static t_data	init(char *filename)
 	mlx.imgs.wall = mlx_xpm_file_to_image(mlx.ptr, "./assets/1/tree.xpm", &a, &a);
 	mlx.imgs.dooropen = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/dooropen.xpm", &a, &a);
 	mlx.imgs.doorclose = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/door.xpm", &a, &a);
+	mlx.enemy = init_lists(mlx.map);
 	getenemyimages(&mlx);
 	getdoor_coord(&mlx);
 	return (mlx);
@@ -152,12 +128,13 @@ void	so_long(char *map)
 		|| !mlx.totalcoins
 		|| !check_condition(mlx.map))
 		exit(0);
+	// display_linkedlist(mlx);
 	// exit(0);
-	mlx.lists = init_lists(mlx.map);
 	setup_background(mlx);
 	drawing_map(&mlx);
 	display_counter(&mlx, 0, " ");
 	mlx_key_hook(mlx.win, key_hook, &mlx);
+	mlx_hook(mlx.win, 17, 1L<<0, close_win, &mlx);
 	mlx_loop_hook(mlx.ptr, move_enemy, &mlx);
 	mlx_loop(mlx.ptr);
 }

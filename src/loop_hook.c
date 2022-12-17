@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:12:30 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/16 17:45:07 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 18:36:11 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	loop_hook(t_data *mlx)
 	t_list *lst;
 	if (i == 1000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			ft_printf("Enemy (%c) :  x ===> %d  y ===> %d \n", lst->content.c, lst->content.y * 50, lst->content.y);
@@ -32,7 +32,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 2000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -42,7 +42,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 3000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -52,7 +52,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 4000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -62,7 +62,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 5000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -72,7 +72,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 6000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -82,7 +82,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 7000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -92,7 +92,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 8000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -102,7 +102,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 9000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -112,7 +112,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 10000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -122,7 +122,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 11000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);
@@ -132,7 +132,7 @@ int	loop_hook(t_data *mlx)
 	}
 	if (i == 12000/2)
 	{
-		lst = mlx->lists.enemy;
+		lst = mlx->enemy;
 		while (lst)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win, img, lst->content.y * 50, (lst->content.x + 1) * 50);

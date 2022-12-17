@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:24:42 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/14 18:34:36 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 14:51:13 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ char	**getfullcontent(const char *filename)
 	if (fd == -1)
 		return (0);
 	text = malloc(getnumberoflines(filename) * sizeof(char *));
+	if (!text)
+	{
+		ft_printf("Error: malloc doesn't allocate memory\n");
+		exit(1);
+	}
 	i = -1;
 	while (1)
 	{

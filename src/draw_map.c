@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:24:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/16 16:59:58 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 18:52:37 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,26 @@ static void	checker_cond(t_data *mlx, char c, int x, int y)
 
 void	display_counter(t_data	*mlx, int movecounter, char	*s)
 {
-	int		i;
 	char	*mc;
 	char	*tc;
 	char	*string;
-	char	*nc;
-	char	*coin;
 
-	i = 0;
 	mc = ft_itoa(movecounter);
 	tc = ft_itoa(mlx->totalcoins);
 	string = ft_strjoin(mc, s);
-	nc = ft_itoa(mlx->ncoins);
-	coin = ft_strjoin(nc, "/");
-	free(nc);
-	nc = ft_strjoin(coin, tc);
-	free(coin);
-	coin = ft_strjoin(nc, " coins");
 	mlx_string_put(mlx->ptr, mlx->win, 10, 10, 0xffffff, string);
-	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 110, 10, 0xffffff, coin);
+	free(string);
+	free(mc);
+	mc = ft_itoa(mlx->ncoins);
+	string = ft_strjoin(mc, "/");
+	free(mc);
+	mc = ft_strjoin(string, tc);
+	free(string);
+	string = ft_strjoin(mc, " coins");
+	mlx_string_put(mlx->ptr, mlx->win, mlx->height - 110, 10, 0xffffff, string);
 	free(mc);
 	free(tc);
-	free(nc);
 	free(string);
-	free(coin);
 }
 
 void	put_img(t_data *mlx, const char c, int x, int y)

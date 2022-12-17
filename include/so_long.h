@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/15 19:14:39 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 19:00:36 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 # include "get_next_line.h"
 # include "libft.h"
 # include "ft_printf.h"
-
-typedef struct	s_linkedlist
-{
-	t_list	*enemy;
-	t_list	*player;
-	t_list	*coins;
-	t_list	*door;
-}	t_linkedlist;
 
 typedef struct s_door_coord
 {
@@ -77,7 +69,7 @@ typedef struct s_data
 	int				nextlevel;
 	t_imgs			imgs;
 	t_door_coord	door;
-	t_linkedlist	lists;
+	t_list			*enemy;
 }		t_data;
 
 void	so_long(char *map);
@@ -93,12 +85,13 @@ int		check_invalid_char(char	**s);
 int		check_condition(char	**s);
 
 int		key_hook(int key, t_data *mlx);
+int		close_win(int key, t_data *mlx);
 void	display_counter(t_data	*mlx, int movecounter, char	*s);
 void	drawing_map(t_data *mlx);
 
 int		loop_hook(t_data *mlx);
-t_linkedlist	init_lists(char **map);
-int move_enemy(t_data *mlx);
+t_list	*init_lists(char **map);
+int		move_enemy(t_data *mlx);
 
 char	**move_down(t_data	*mlx, int i, int j);
 char	**move_up(t_data	*mlx, int i, int j);

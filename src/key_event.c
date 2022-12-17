@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:15:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/14 13:15:14 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 19:00:24 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,13 @@ int	key_hook(int key, t_data *mlx)
 			exit(0);
 		drawing_map(mlx);
 	}
+	return (0);
+}
+
+int	close_win(int key, t_data *mlx)
+{
+	(void)mlx;
+	(void)key;
+	exit(0);
 	return (0);
 }
