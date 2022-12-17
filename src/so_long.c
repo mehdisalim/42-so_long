@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 18:57:33 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 19:43:26 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	setup_background(t_data mlx)
 	if (mlx.height > h && mlx.width >  w)
 		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, w, h);
 	
-	// display_linkedlist(mlx);
-	
 }
 
 void	getenemyimages(t_data *mlx)
@@ -109,6 +107,7 @@ static t_data	init(char *filename)
 	mlx.imgs.wall = mlx_xpm_file_to_image(mlx.ptr, "./assets/1/tree.xpm", &a, &a);
 	mlx.imgs.dooropen = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/dooropen.xpm", &a, &a);
 	mlx.imgs.doorclose = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/door.xpm", &a, &a);
+	mlx.imgs.smallbg = mlx_xpm_file_to_image(mlx.ptr, "./assets/background/smallbg.xpm", &a, &a);
 	mlx.enemy = init_lists(mlx.map);
 	getenemyimages(&mlx);
 	getdoor_coord(&mlx);
@@ -128,8 +127,6 @@ void	so_long(char *map)
 		|| !mlx.totalcoins
 		|| !check_condition(mlx.map))
 		exit(0);
-	// display_linkedlist(mlx);
-	// exit(0);
 	setup_background(mlx);
 	drawing_map(&mlx);
 	display_counter(&mlx, 0, " ");

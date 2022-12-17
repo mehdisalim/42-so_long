@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 19:00:36 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 19:33:27 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_imgs
 	void	*coins;
 	t_enemy	enemy;
 	void	*wall;
+	void	*smallbg;
 }	t_imgs;
 
 typedef struct s_data

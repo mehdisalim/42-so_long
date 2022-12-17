@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:40:47 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/15 11:09:26 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 19:46:16 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct	s_content
 {
-	char		c;
+	char	c;
 	int		x;
 	int		y;
 } t_content;

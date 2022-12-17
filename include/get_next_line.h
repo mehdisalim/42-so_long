@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:33:25 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/08 12:12:39 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/17 19:45:55 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+#ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
+#endif
 
 char	*get_next_line(int fd);
 char	*sm_strjoin(char *str, char *buff);
