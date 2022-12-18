@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:15:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 19:00:24 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/18 19:34:12 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 static void	checker(t_data *mlx, int *movecounter, char *imgname, char *dir)
 {
-	int	q;
-
-	q = 50;
 	mlx_destroy_image(mlx->ptr, mlx->imgs.player);
 	mlx_clear_window(mlx->ptr, mlx->win);
 	setup_background(*mlx);
-	mlx->imgs.player = mlx_xpm_file_to_image(mlx->ptr, imgname, &q, &q);
+	mlx->imgs.player = get_image(mlx, imgname);
 	display_counter(mlx, ++(*movecounter), dir);
 	ft_printf("%d ==> %s\n", *movecounter, dir);
 }
@@ -85,10 +82,8 @@ int	key_hook(int key, t_data *mlx)
 	return (0);
 }
 
-int	close_win(int key, t_data *mlx)
+int	close_win(void)
 {
-	(void)mlx;
-	(void)key;
 	exit(0);
 	return (0);
 }

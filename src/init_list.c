@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:07:15 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 13:44:46 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/18 19:38:49 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_content	getcontent(char c, int x, int y)
 {
-	t_content content;
+	t_content	content;
+
 	content.c = c;
 	content.x = x;
 	content.y = y;
@@ -23,21 +24,18 @@ t_content	getcontent(char c, int x, int y)
 
 t_list	*init_lists(char **map)
 {
-	int i, j;
-	t_list	*enemy = NULL;
+	t_list	*enemy;
+	int		i;
+	int		j;
 
-	i = 0;
-	while (map[i])
+	enemy = NULL;
+	i = -1;
+	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
+		j = -1;
+		while (map[i][++j])
 			if (map[i][j] == 'X')
 				ft_lstadd_back(&enemy, ft_lstnew(getcontent('X', i, j)));
-
-			j++;
-		}
-		i++;
 	}
 	return (enemy);
 }

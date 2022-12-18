@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   protection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 17:07:35 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/18 14:52:31 by esalim           ###   ########.fr       */
+/*   Created: 2022/12/18 15:00:32 by esalim            #+#    #+#             */
+/*   Updated: 2022/12/18 19:31:10 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../include/so_long.h"
 
-t_list	*ft_lstmap(t_list *lst, t_content (*f)(t_content), void (*d)(t_content))
+void	*get_image(t_data *mlx, char *filename)
 {
-	t_list	*new;
-	t_list	*tmp;
+	void	*img;
+	int		a;
+	char	*message;
 
-	new = 0;
-	while (lst)
+	a = 50;
+	img = mlx_xpm_file_to_image(mlx->ptr, filename, &a, &a);
+	if (!img)
 	{
-		tmp = ft_lstnew(f(lst->content));
-		if (!tmp)
-		{
-			ft_lstclear(&new, d);
-			return (0);
-		}
-		ft_lstadd_back(&new, tmp);
-		lst = lst->next;
+		message = ft_strjoin("Error: Can not access to the file ", filename);
+		ft_printf("%s \n", message);
+		free(message);
+		exit(1);
 	}
-	return (new);
+	return (img);
 }

@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:26:00 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/09 20:37:28 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/18 19:43:00 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_coins(char **s)
 	return (p);
 }
 
-int	check_door(char **s)
+int	check_door(char **s, t_data *mlx)
 {
 	int	i;
 	int	j;
@@ -44,8 +44,14 @@ int	check_door(char **s)
 	{
 		j = -1;
 		while (s[i][++j])
+		{
 			if (s[i][j] == 'E')
+			{
+				mlx->door.xdoor = i;
+				mlx->door.ydoor = j;
 				p++;
+			}
+		}
 	}
 	if (p == 0)
 		return (ft_printf("Error: there is (no|multi) door in the map\n"), 0);
@@ -58,8 +64,8 @@ int	check_invalid_char(char **s)
 	int		j;
 	char	*message;
 
-	message = "Error: there is invalid characters in the map";
 	i = -1;
+	message = "Error: there is invalid characters in the map";
 	while (s[++i])
 	{
 		j = -1;

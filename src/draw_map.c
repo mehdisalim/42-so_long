@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:24:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 18:52:37 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:54:44 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ static void	checker_cond(t_data *mlx, char c, int x, int y)
 	int	i;
 
 	i = 50;
+	if (c == 'E')
+	{
+		if (mlx->ncoins == mlx->totalcoins)
+		{
+			mlx->isopen = 1;
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.d_o, y, x);
+		}
+		else
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.d_c, y, x);
+	}
 	if (c == '1')
 		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.wall, y, x);
 	if (c == 'P')
@@ -51,39 +61,23 @@ void	display_counter(t_data	*mlx, int movecounter, char	*s)
 	free(string);
 }
 
-void	put_img(t_data *mlx, const char c, int x, int y)
+static void	put_img(t_data *mlx, const char c, int x, int y)
 {
 	static t_door_coord	door;
 	int					i;
 
 	i = 50;
-	if (!mlx->nextlevel)
+	if (c == 'E' && (!door.xdoor || !door.ydoor))
 	{
-		door.xdoor = 0;
-		door.ydoor = 0;
-	}
-	if (c == 'E')
-	{
-		if (!door.xdoor || !door.ydoor)
-		{
-			door.xdoor = x;
-			door.ydoor = y;
-			mlx->nextlevel = 1;
-		}
-		if (mlx->ncoins == mlx->totalcoins)
-		{
-			mlx->isopen = 1;
-			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.dooropen, y, x);
-		}
-		else
-			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.doorclose, y, x);
+		door.xdoor = x;
+		door.ydoor = y;
 	}
 	if (c == 'P' && door.xdoor == x && door.ydoor == y)
 	{
 		if (mlx->isopen)
-			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.dooropen, y, x);
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.d_o, y, x);
 		else
-			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.doorclose, y, x);
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.d_c, y, x);
 		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.player, y, x);
 	}
 	checker_cond(mlx, c, x, y);

@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:40:47 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 19:46:16 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:53:11 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_content
+typedef struct s_content
 {
 	char	c;
 	int		x;
 	int		y;
-} t_content;
+}	t_content;
 
 typedef struct s_list
 {
@@ -71,6 +71,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(t_content));
 void	ft_lstclear(t_list **lst, void (*del)(t_content));
 void	ft_lstiter(t_list *lst, void (*f)(t_content));
-t_list	*ft_lstmap(t_list *lst, t_content (*f)(t_content), void (*del)(t_content));
+t_list	*ft_lstmap(t_list *lst, t_content (*f)(t_content),
+			void (*d)(t_content));
 
 #endif

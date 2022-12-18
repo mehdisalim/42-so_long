@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/17 20:10:51 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/18 17:01:16 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC		=	main.c \
 			./src/so_long.c \
 			./src/loop_hook.c \
 			./src/init_list.c \
-			./src/move_enemy.c
+			./src/move_enemy.c \
+			./src/protection.c
 
 OBJ		=	${SRC:.c=.o}
 LIBFT	=	libft

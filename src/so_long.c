@@ -6,31 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 19:43:26 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/18 19:48:40 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-static void	getdoor_coord(t_data	*mlx)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (mlx->map[++i])
-	{
-		j = -1;
-		while (mlx->map[i][++j])
-		{
-			if (mlx->map[i][j] == 'E')
-			{
-				mlx->door.xdoor = i;
-				mlx->door.ydoor = j;
-			}
-		}
-	}
-}
 
 static char	*getrandomcoin(int index)
 {
@@ -47,70 +27,60 @@ void	setup_background(t_data mlx)
 {
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 50);
 	if (mlx.height > 5120 || mlx.width > 2880)
-	{
-		ft_printf("Error: size is too large.\n");
-		exit(1);
-	}
-	int h = 1200;
-	int w = 1650;
-	ft_printf("%d ===> %d \n", mlx.height, mlx.width);
-	if (mlx.height >= h)
-		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, w, 0);
-	if (mlx.width >=  w)
-		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, h);
-	if (mlx.height > h && mlx.width >  w)
-		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, w, h);
-	
+		MPRINT("Error: size is too large.");
+	if (mlx.height >= 1200)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1650, 0);
+	if (mlx.width >= 1650)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 1200);
+	if (mlx.height > 1200 && mlx.width > 1650)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1650, 1200);
 }
 
 void	getenemyimages(t_data *mlx)
 {
-	int a = 50;
-	mlx->imgs.enemy.img0 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e0.xpm", &a, &a);
-	mlx->imgs.enemy.img1 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e1.xpm", &a, &a);
-	mlx->imgs.enemy.img2 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e2.xpm", &a, &a);
-	mlx->imgs.enemy.img3 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e3.xpm", &a, &a);
-	mlx->imgs.enemy.img4 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e4.xpm", &a, &a);
-	mlx->imgs.enemy.img5 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e5.xpm", &a, &a);
-	mlx->imgs.enemy.img6 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e6.xpm", &a, &a);
-	mlx->imgs.enemy.img7 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e7.xpm", &a, &a);
-	mlx->imgs.enemy.img8 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e8.xpm", &a, &a);
-	mlx->imgs.enemy.img9 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e9.xpm", &a, &a);
-	mlx->imgs.enemy.img10 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e10.xpm", &a, &a);
-	mlx->imgs.enemy.img11 = mlx_xpm_file_to_image(mlx->ptr, "./assets/X/e11.xpm", &a, &a);
+	int		a;
+
+	a = 50;
+	mlx->imgs.enemy.img0 = get_image(mlx, "./assets/X/e0.xpm");
+	mlx->imgs.enemy.img1 = get_image(mlx, "./assets/X/e1.xpm");
+	mlx->imgs.enemy.img2 = get_image(mlx, "./assets/X/e2.xpm");
+	mlx->imgs.enemy.img3 = get_image(mlx, "./assets/X/e3.xpm");
+	mlx->imgs.enemy.img4 = get_image(mlx, "./assets/X/e4.xpm");
+	mlx->imgs.enemy.img5 = get_image(mlx, "./assets/X/e5.xpm");
+	mlx->imgs.enemy.img6 = get_image(mlx, "./assets/X/e6.xpm");
+	mlx->imgs.enemy.img7 = get_image(mlx, "./assets/X/e7.xpm");
+	mlx->imgs.enemy.img8 = get_image(mlx, "./assets/X/e8.xpm");
+	mlx->imgs.enemy.img9 = get_image(mlx, "./assets/X/e9.xpm");
+	mlx->imgs.enemy.img10 = get_image(mlx, "./assets/X/e10.xpm");
+	mlx->imgs.enemy.img11 = get_image(mlx, "./assets/X/e11.xpm");
 }
 
 static t_data	init(char *filename)
 {
 	t_data	mlx;
-	int a = 0;
+	int		a;
 
-	if (!ft_strnstr(filename, ".ber", ft_strlen(filename)))
-	{
-		ft_printf("Please make sure you put the currect file format (*.ber)");
-		exit(1);
-	}
+	a = 50;
 	mlx.map = getfullcontent(filename);
-	if (!mlx.map)
-		exit(0);
+	mlx.ptr = mlx_init();
 	mlx.height = ((ft_strlen(mlx.map[0]) - 1) * 50);
 	mlx.width = (doublestrlen(mlx.map) * 50) + 50;
-	mlx.ptr = mlx_init();
+	mlx.win = mlx_new_window(mlx.ptr, mlx.height, mlx.width, "so_long");
+	if (!mlx.map || !mlx.ptr || !mlx.win)
+		exit(1);
 	mlx.isopen = 0;
 	mlx.movecounter = 0;
-	mlx.win = mlx_new_window(mlx.ptr, mlx.height, mlx.width, "so_long");
 	mlx.ncoins = 0;
 	mlx.totalcoins = check_coins(mlx.map);
-	mlx.imgs.bg = mlx_xpm_file_to_image(mlx.ptr, "./assets/background/bg.xpm", &a, &a);
-	mlx.imgs.player = mlx_xpm_file_to_image(mlx.ptr, "./assets/P/elf0.xpm", &a, &a);
-	mlx.imgs.coins = mlx_xpm_file_to_image(mlx.ptr, getrandomcoin(mlx.totalcoins % 10), &a, &a);
-	mlx.imgs.wall = mlx_xpm_file_to_image(mlx.ptr, "./assets/1/tree.xpm", &a, &a);
-	mlx.imgs.dooropen = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/dooropen.xpm", &a, &a);
-	mlx.imgs.doorclose = mlx_xpm_file_to_image(mlx.ptr, "./assets/E/door.xpm", &a, &a);
-	mlx.imgs.smallbg = mlx_xpm_file_to_image(mlx.ptr, "./assets/background/smallbg.xpm", &a, &a);
+	mlx.imgs.bg = get_image(&mlx, "./assets/background/bg.xpm");
+	mlx.imgs.player = get_image(&mlx, "./assets/P/elf0.xpm");
+	mlx.imgs.coins = get_image(&mlx, getrandomcoin(mlx.totalcoins % 10));
+	mlx.imgs.wall = get_image(&mlx, "./assets/1/tree.xpm");
+	mlx.imgs.d_o = get_image(&mlx, "./assets/E/dooropen.xpm");
+	mlx.imgs.d_c = get_image(&mlx, "./assets/E/door.xpm");
+	mlx.imgs.smallbg = get_image(&mlx, "./assets/background/smallbg.xpm");
 	mlx.enemy = init_lists(mlx.map);
 	getenemyimages(&mlx);
-	getdoor_coord(&mlx);
 	return (mlx);
 }
 
@@ -118,20 +88,25 @@ void	so_long(char *map)
 {
 	t_data	mlx;
 
+	if (!ft_strnstr(map, ".ber", ft_strlen(map)))
+	{
+		ft_printf("Please make sure you put the currect file format (*.ber)");
+		exit(1);
+	}
 	mlx = init(map);
 	if (!check_size(mlx.map)
 		||!check_wall(mlx.map)
 		|| !check_players(mlx.map)
 		|| !check_invalid_char(mlx.map)
-		|| !check_door(mlx.map)
+		|| !check_door(mlx.map, &mlx)
 		|| !mlx.totalcoins
 		|| !check_condition(mlx.map))
-		exit(0);
+		exit(1);
 	setup_background(mlx);
 	drawing_map(&mlx);
 	display_counter(&mlx, 0, " ");
 	mlx_key_hook(mlx.win, key_hook, &mlx);
-	mlx_hook(mlx.win, 17, 1L<<0, close_win, &mlx);
+	mlx_hook(mlx.win, 17, 1L << 0, close_win, &mlx);
 	mlx_loop_hook(mlx.ptr, move_enemy, &mlx);
 	mlx_loop(mlx.ptr);
 }
