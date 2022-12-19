@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/18 17:01:46 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:45:11 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		check_players(char	**s);
 int		check_door(char	**s, t_data *mlx);
 int		check_coins(char	**s);
 int		check_invalid_char(char	**s);
-int		check_condition(char	**s);
+int     check_path(char **map);
+void	freemap(char	**map);
 
 int		key_hook(int key, t_data *mlx);
 int		close_win(void);

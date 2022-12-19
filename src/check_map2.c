@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:26:00 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/18 19:43:00 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 14:38:51 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,50 @@ int	check_invalid_char(char **s)
 	return (1);
 }
 
-int	check_condition(char **s)
+void	check_conditions(char **map, int *i, int *j)
+{
+	if (map[*i][*j] == 'P')
+	{
+		if (!ft_strchr("1PX", map[*i][*j + 1]))
+		{
+			map[*i][*j + 1] = 'P';
+			*i = 0;
+		}
+		else if (!ft_strchr("1PX", map[*i][*j - 1]))
+		{
+			map[*i][*j - 1] = 'P';
+			*i = 0;
+		}
+		else if (!ft_strchr("1PX", map[*i + 1][*j]))
+		{
+			map[*i + 1][*j] = 'P';
+			*i = 0;
+		}
+		else if (!ft_strchr("1PX", map[*i - 1][*j]))
+		{
+			map[*i - 1][*j] = 'P';
+			*i = 0;
+		}
+	}
+}
+
+int	check_path(char **map)
 {
 	int	i;
 	int	j;
 
-	if (!check_wall(s))
+	if (!check_wall(map))
 		return (0);
 	i = -1;
-	while (s[++i])
+	while (map[++i])
 	{
 		j = -1;
-		while (s[i][++j])
-		{
-			if (s[i][j] == 'C' || s[i][j] == 'P' || s[i][j] == 'E')
-				if (s[i - 1][j] == '1' && s[i + 1][j] == '1'
-					&& s[i][j - 1] == '1' && s[i][j + 1] == '1')
-					return (ft_printf("the condition is inside wall :(\n"), 0);
-		}
+		while (map[i][++j])
+			check_conditions(map, &i, &j);
 	}
+	i = -1;
+	while (map[++i])
+		if (ft_strchr(map[i], 'C') || ft_strchr(map[i], 'E'))
+			return (freemap(map), ft_printf("Error: map invalid !\n"), 0);
 	return (1);
 }

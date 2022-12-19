@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/18 17:01:16 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/19 12:22:14 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ run		:
 	./$(NAME) "maps/map1.ber"
 
 %.o		:	%.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	$(CC) -Imlx -c $< -o $@
 
 clean	:
 	make clean -C $(LIBFT)

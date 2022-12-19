@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/18 19:48:40 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 14:38:40 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	so_long(char *map)
 		|| !check_invalid_char(mlx.map)
 		|| !check_door(mlx.map, &mlx)
 		|| !mlx.totalcoins
-		|| !check_condition(mlx.map))
+		|| !check_path(getfullcontent(map)))
 		exit(1);
 	setup_background(mlx);
 	drawing_map(&mlx);
