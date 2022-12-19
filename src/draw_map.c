@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:24:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/18 14:54:44 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 16:01:30 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	checker_cond(t_data *mlx, char c, int x, int y)
 		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.player, y, x);
 	if (c == 'C')
 		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.coins, y, x);
-	if (c == 'X')
+	if (c == 'X' && mlx->part == 1)
 		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->imgs.enemy.img0, y, x);
 }
 
@@ -91,15 +91,14 @@ void	drawing_map(t_data *mlx)
 	int	x;
 	int	y;
 
-	i = 0;
+	i = -1;
 	x = 50;
-	while (mlx->map[i])
+	while (mlx->map[++i])
 	{
 		j = 0;
 		y = -50;
 		while (mlx->map[i][j] && ft_strchr("10ECPX", mlx->map[i][j]))
 			put_img(mlx, mlx->map[i][j++], x, (y += 50));
 		x += 50;
-		i++;
 	}
 }

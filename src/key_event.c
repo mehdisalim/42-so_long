@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:15:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/18 19:34:12 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 16:31:47 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void	checker(t_data *mlx, int *movecounter, char *imgname, char *dir)
 	mlx_clear_window(mlx->ptr, mlx->win);
 	setup_background(*mlx);
 	mlx->imgs.player = get_image(mlx, imgname);
-	display_counter(mlx, ++(*movecounter), dir);
+	(*movecounter)++;
+	if (mlx->part == 1)
+		display_counter(mlx, *movecounter, dir);
 	ft_printf("%d ==> %s\n", *movecounter, dir);
 }
 

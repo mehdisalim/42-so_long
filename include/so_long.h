@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/19 13:45:11 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 15:57:31 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define MPRINT(STRING) {ft_printf("%s\n", STRING); exit(0);}
 
-void	so_long(char *map);
+void	so_long(char *map, char	*part);
 void	setup_background(t_data mlx);
 char	**getfullcontent(const char *filename);
 int		doublestrlen(char	**s);

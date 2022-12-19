@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:24:42 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/17 14:51:13 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 15:36:50 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static int	getnumberoflines(const char *filename)
 	i = 1;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (0);
+	{
+		ft_printf("Error: this file ( %s ) doesn't work !!", filename);
+		exit(1);
+	}
 	str = get_next_line(fd);
 	while (str)
 	{

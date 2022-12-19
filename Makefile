@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/19 15:05:58 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/19 16:12:19 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,12 @@ $(NAME)	:	$(OBJ)
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
 	$(CC) $(OBJ) libs/libft.a libs/libftprintf.a  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	./$(NAME) "maps/map.ber"
 
-run		:
-	./$(NAME) "maps/map.ber"
+run		: $(NAME)
+	./$< "maps/map_bonus.ber" mand
 
-bunos :
-	./so_long "maps/map_bonus.ber"
+bonus : $(NAME)
+	./$< "maps/map_bonus.ber" bonus
 
 %.o		:	%.c
 	$(CC) -Imlx -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:19:19 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/18 14:06:00 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 16:18:38 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**move_up(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i - 1][j] == 'C')
 		mlx->ncoins += 1;
-	if (mlx->map[i - 1][j] == 'X')
+	if (mlx->map[i - 1][j] == 'X' && mlx->part == 1)
 	{
 		freemap(mlx->map);
 		mlx_destroy_window(mlx->ptr, mlx->win);
@@ -66,7 +66,7 @@ char	**move_down(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i + 1][j] == 'C')
 		mlx->ncoins += 1;
-	if (mlx->map[i + 1][j] == 'X')
+	if (mlx->map[i + 1][j] == 'X' && mlx->part)
 	{
 		freemap(mlx->map);
 		mlx_destroy_window(mlx->ptr, mlx->win);
@@ -95,7 +95,7 @@ char	**move_right(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i][j + 1] == 'C')
 		mlx->ncoins += 1;
-	if (mlx->map[i][j + 1] == 'X')
+	if (mlx->map[i][j + 1] == 'X' && mlx->part == 1)
 	{
 		freemap(mlx->map);
 		mlx_destroy_window(mlx->ptr, mlx->win);
@@ -124,7 +124,7 @@ char	**move_left(t_data *mlx, int i, int j)
 	}
 	if (mlx->map[i][j - 1] == 'C')
 		mlx->ncoins += 1;
-	if (mlx->map[i][j - 1] == 'X')
+	if (mlx->map[i][j - 1] == 'X' && mlx->part == 1)
 	{
 		freemap(mlx->map);
 		mlx_destroy_window(mlx->ptr, mlx->win);

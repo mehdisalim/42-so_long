@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/19 14:38:40 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 16:36:02 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,25 @@ static char	*getrandomcoin(int index)
 
 void	setup_background(t_data mlx)
 {
-	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 50);
+	int	k;
+
+	k = 0;
+	if (mlx.part == 1)
+		k = 50;
+	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, k);
 	if (mlx.height > 5120 || mlx.width > 2880)
 		MPRINT("Error: size is too large.");
 	if (mlx.height >= 1200)
-		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1650, 0);
-	if (mlx.width >= 1650)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1600, 0);
+	if (mlx.width >= 1600)
 		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 1200);
-	if (mlx.height > 1200 && mlx.width > 1650)
-		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1650, 1200);
+	if (mlx.height > 1200 && mlx.width > 1600)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1600, 1200);
 }
 
 void	getenemyimages(t_data *mlx)
 {
-	int		a;
+	int	a;
 
 	a = 50;
 	mlx->imgs.enemy.img0 = get_image(mlx, "./assets/X/e0.xpm");
@@ -55,7 +60,7 @@ void	getenemyimages(t_data *mlx)
 	mlx->imgs.enemy.img11 = get_image(mlx, "./assets/X/e11.xpm");
 }
 
-static t_data	init(char *filename)
+static t_data	init(char *filename, char	*part)
 {
 	t_data	mlx;
 	int		a;
@@ -65,6 +70,13 @@ static t_data	init(char *filename)
 	mlx.ptr = mlx_init();
 	mlx.height = ((ft_strlen(mlx.map[0]) - 1) * 50);
 	mlx.width = (doublestrlen(mlx.map) * 50) + 50;
+	mlx.part = 0;
+	if (!ft_strncmp(part, "bonus", 5))
+	{
+		mlx.part = 1;
+		mlx.enemy = init_lists(mlx.map);
+		getenemyimages(&mlx);
+	}
 	mlx.win = mlx_new_window(mlx.ptr, mlx.height, mlx.width, "so_long");
 	if (!mlx.map || !mlx.ptr || !mlx.win)
 		exit(1);
@@ -79,12 +91,10 @@ static t_data	init(char *filename)
 	mlx.imgs.d_o = get_image(&mlx, "./assets/E/dooropen.xpm");
 	mlx.imgs.d_c = get_image(&mlx, "./assets/E/door.xpm");
 	mlx.imgs.smallbg = get_image(&mlx, "./assets/background/smallbg.xpm");
-	mlx.enemy = init_lists(mlx.map);
-	getenemyimages(&mlx);
 	return (mlx);
 }
 
-void	so_long(char *map)
+void	so_long(char *map, char	*part)
 {
 	t_data	mlx;
 
@@ -93,7 +103,8 @@ void	so_long(char *map)
 		ft_printf("Please make sure you put the currect file format (*.ber)");
 		exit(1);
 	}
-	mlx = init(map);
+
+	mlx = init(map, part);
 	if (!check_size(mlx.map)
 		||!check_wall(mlx.map)
 		|| !check_players(mlx.map)
@@ -104,9 +115,12 @@ void	so_long(char *map)
 		exit(1);
 	setup_background(mlx);
 	drawing_map(&mlx);
-	display_counter(&mlx, 0, " ");
+	if (mlx.part == 1)
+	{
+		mlx_loop_hook(mlx.ptr, move_enemy, &mlx);
+		display_counter(&mlx, 0, " ");
+	}
 	mlx_key_hook(mlx.win, key_hook, &mlx);
 	mlx_hook(mlx.win, 17, 1L << 0, close_win, &mlx);
-	mlx_loop_hook(mlx.ptr, move_enemy, &mlx);
 	mlx_loop(mlx.ptr);
 }
