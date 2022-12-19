@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:26:00 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/19 14:38:51 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/19 15:08:26 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ int	check_path(char **map)
 	while (map[++i])
 		if (ft_strchr(map[i], 'C') || ft_strchr(map[i], 'E'))
 			return (freemap(map), ft_printf("Error: map invalid !\n"), 0);
+	freemap(map);
 	return (1);
 }
