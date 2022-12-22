@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   destroy_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 16:17:10 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/22 12:48:29 by esalim           ###   ########.fr       */
+/*   Created: 2022/12/22 10:03:37 by esalim            #+#    #+#             */
+/*   Updated: 2022/12/22 12:41:11 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../include/so_long.h"
 
-size_t	ft_strlen(const char *str)
+static void	freemap(char	**map)
 {
-	int	length;
+	int	i;
 
-	length = 0;
-	while (str[length])
-		length++;
-	return (length);
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
+}
+
+void	destroy_game(t_data *mlx, char *message)
+{
+	freemap(mlx->map);
+	mlx_clear_window(mlx->ptr, mlx->win);
+	mlx_destroy_window(mlx->ptr, mlx->win);
+	if (mlx->part == 1)
+		ft_lstclear(&mlx->enemy, NULL);
+	ft_printf("%s\n", message);
+	exit(0);
 }

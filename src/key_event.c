@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:15:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/19 16:31:47 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/22 12:36:14 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**changeplayerinmap(t_data *mlx, int dir)
 	{
 		map = getmap(mlx, &mlx->movecounter, dir, i);
 		if (map)
-			return (map);
+			destroy_game(mlx, "Error: map is empty\n");
 	}
 	return (mlx->map);
 }
@@ -69,23 +69,19 @@ char	**changeplayerinmap(t_data *mlx, int dir)
 int	key_hook(int key, t_data *mlx)
 {
 	if (key == 53)
-	{
-		mlx_clear_window(mlx->ptr, mlx->win);
-		mlx_destroy_window(mlx->ptr, mlx->win);
-		exit(0);
-	}
+		destroy_game(mlx, "quit game :0\n");
 	if ((key >= 0 && key < 3) || (key >= 123 && key <= 126) || key == 13)
 	{
 		mlx->map = changeplayerinmap(mlx, key);
 		if (!mlx->map)
-			exit(0);
+			destroy_game(mlx, "Error: map is empty\n");
 		drawing_map(mlx);
 	}
 	return (0);
 }
 
-int	close_win(void)
+int	close_win(t_data *mlx)
 {
-	exit(0);
+	destroy_game(mlx, "quit game :)\n");
 	return (0);
 }

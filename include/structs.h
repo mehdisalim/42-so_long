@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 20:30:27 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/19 15:59:27 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/22 10:14:56 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_imgs
 
 typedef struct s_data
 {
-	void			*img;
 	void			*ptr;
 	void			*win;
 	void			*playerimg;

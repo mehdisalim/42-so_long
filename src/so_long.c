@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/19 16:36:02 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/22 13:03:01 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static char	*getrandomcoin(int index)
 {
-	if (index == 0 || index == 4 || index == 8)
+	if (index == 0)
 		return ("./assets/C/coin1.xpm");
-	if (index == 1 || index == 5)
+	if (index == 1)
 		return ("./assets/C/coin2.xpm");
-	if (index == 2 || index == 6 || index == 9)
+	if (index == 2)
 		return ("./assets/C/coin3.xpm");
 	return ("./assets/C/coin4.xpm");
 }
@@ -32,13 +32,19 @@ void	setup_background(t_data mlx)
 		k = 50;
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, k);
 	if (mlx.height > 5120 || mlx.width > 2880)
-		MPRINT("Error: size is too large.");
-	if (mlx.height >= 1200)
-		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1600, 0);
-	if (mlx.width >= 1600)
-		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 1200);
+		destroy_game(&mlx, "Error: size is too large.");
+	if (mlx.height >= 1250)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1650, 0);
+	if (mlx.height >= 2400)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 3200, 0);
+	if (mlx.width >= 1650)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 1250);
+	if (mlx.width >= 3200)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 0, 2400);
 	if (mlx.height > 1200 && mlx.width > 1600)
 		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 1600, 1200);
+	if (mlx.height > 2400 && mlx.width > 3200)
+		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.imgs.bg, 3200, 2400);
 }
 
 void	getenemyimages(t_data *mlx)
@@ -68,8 +74,8 @@ static t_data	init(char *filename, char	*part)
 	a = 50;
 	mlx.map = getfullcontent(filename);
 	mlx.ptr = mlx_init();
-	mlx.height = ((ft_strlen(mlx.map[0]) - 1) * 50);
 	mlx.width = (doublestrlen(mlx.map) * 50) + 50;
+	mlx.height = ((ft_strlen(mlx.map[0]) - 1) * 50);
 	mlx.part = 0;
 	if (!ft_strncmp(part, "bonus", 5))
 	{
@@ -86,7 +92,7 @@ static t_data	init(char *filename, char	*part)
 	mlx.totalcoins = check_coins(mlx.map);
 	mlx.imgs.bg = get_image(&mlx, "./assets/background/bg.xpm");
 	mlx.imgs.player = get_image(&mlx, "./assets/P/elf0.xpm");
-	mlx.imgs.coins = get_image(&mlx, getrandomcoin(mlx.totalcoins % 10));
+	mlx.imgs.coins = get_image(&mlx, getrandomcoin(mlx.totalcoins % 4));
 	mlx.imgs.wall = get_image(&mlx, "./assets/1/tree.xpm");
 	mlx.imgs.d_o = get_image(&mlx, "./assets/E/dooropen.xpm");
 	mlx.imgs.d_c = get_image(&mlx, "./assets/E/door.xpm");
@@ -97,22 +103,20 @@ static t_data	init(char *filename, char	*part)
 void	so_long(char *map, char	*part)
 {
 	t_data	mlx;
+	int		len;
 
-	if (!ft_strnstr(map, ".ber", ft_strlen(map)))
+	len = ft_strlen(map);
+	if (!ft_strnstr(map + len - 4, ".ber", 4))
 	{
 		ft_printf("Please make sure you put the currect file format (*.ber)");
 		exit(1);
 	}
-
 	mlx = init(map, part);
-	if (!check_size(mlx.map)
-		||!check_wall(mlx.map)
-		|| !check_players(mlx.map)
-		|| !check_invalid_char(mlx.map)
-		|| !check_door(mlx.map, &mlx)
-		|| !mlx.totalcoins
+	if (!check_size(mlx.map) ||!check_wall(mlx.map) || !check_players(mlx.map)
+		|| !check_invalid_char(mlx.map) || !check_door(mlx.map, &mlx)
+		|| !check_is_rectangle(mlx.map) || !mlx.totalcoins
 		|| !check_path(getfullcontent(map)))
-		exit(1);
+		destroy_game(&mlx, "invalid map");
 	setup_background(mlx);
 	drawing_map(&mlx);
 	if (mlx.part == 1)

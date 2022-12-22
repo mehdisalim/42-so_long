@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/19 15:57:31 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/22 13:02:09 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include "ft_printf.h"
 # include "structs.h"
 
-# define MPRINT(STRING) {ft_printf("%s\n", STRING); exit(0);}
-
 void	so_long(char *map, char	*part);
 void	setup_background(t_data mlx);
 char	**getfullcontent(const char *filename);
@@ -31,11 +29,12 @@ int		check_players(char	**s);
 int		check_door(char	**s, t_data *mlx);
 int		check_coins(char	**s);
 int		check_invalid_char(char	**s);
-int     check_path(char **map);
-void	freemap(char	**map);
+int		check_is_rectangle(char **content);
+int		check_path(char **map);
+void	destroy_game(t_data *mlx, char *message);
 
 int		key_hook(int key, t_data *mlx);
-int		close_win(void);
+int		close_win(t_data *mlx);
 void	display_counter(t_data	*mlx, int movecounter, char	*s);
 void	drawing_map(t_data *mlx);
 

@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 18:36:32 by esalim            #+#    #+#              #
-#    Updated: 2022/12/19 22:08:57 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/22 13:00:49 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC		=	main.c \
 			./src/loop_hook.c \
 			./src/init_list.c \
 			./src/move_enemy.c \
-			./src/protection.c
+			./src/protection.c \
+			./src/destroy_game.c
 
 OBJ		=	${SRC:.c=.o}
 LIBFT	=	libft
@@ -34,7 +35,7 @@ CFLAG	=	-Wall -Werror -Wextra
 
 all		: 	$(NAME)
 
-$(NAME)	:	$(OBJ)
+$(NAME)	:	$(OBJ) libs
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
 	$(CC) $(OBJ) libs/libft.a libs/libftprintf.a  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
@@ -46,14 +47,14 @@ bonus	: $(NAME)
 	./$< "maps/map_bonus.ber" bonus
 
 %.o		:	%.c
-	$(CC) $(CFLAG) -Imlx -c $< -o $@
+	@$(CC) $(CFLAG) -Imlx -c $< -o $@
 
 clean	:
 	make clean -C $(LIBFT)
 	make clean -C $(FT_PRINTF)
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 
 fclean	:	clean
-	rm -rf $(NAME) libs/libftprintf.a libs/libft.a
+	@rm -rf $(NAME) libs/libftprintf.a libs/libft.a
 
 re		:	fclean all

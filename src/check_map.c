@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:00:39 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/09 20:32:15 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/22 12:47:48 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	doublestrlen(char **s)
 	int	i;
 
 	i = 0;
+	if (!*s || !s)
+		exit(1);
 	while (s[i])
 		i++;
 	return (i);
@@ -46,6 +48,14 @@ int	check_size(char **s)
 			return (ft_printf("Error: the size is not the same.\n"), 0);
 	}
 	return (1);
+}
+
+int	check_is_rectangle(char **content)
+{
+	if ((int)(ft_strlen(content[0]) - 1) > doublestrlen(content))
+		return (1);
+	ft_printf("Error: the map is not rectangle :(\n");
+	return (0);
 }
 
 int	check_wall(char **content)
