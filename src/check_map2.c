@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:26:00 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/22 12:55:27 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/23 18:50:21 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ int	check_invalid_char(char **s)
 	int		i;
 	int		j;
 	char	*message;
-
+	
 	i = -1;
-	message = "Error: there is invalid characters in the map";
+	message = "Error: there is invalid characters in the map\n";
+	// if (mlx->part == 1)
+	// 	str = "E01PCX\n";
 	while (s[++i])
 	{
 		j = -1;
@@ -120,6 +122,6 @@ int	check_path(char **map)
 	i = -1;
 	while (map[++i])
 		if (ft_strchr(map[i], 'C') || ft_strchr(map[i], 'E'))
-			return (ft_printf("Error: map invalid !\n"), 0);
+			return (ft_printf("Error: map invalid !\n"), 0); 
 	return (1);
 }
