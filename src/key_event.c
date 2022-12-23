@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:15:55 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/22 12:36:14 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/23 20:15:52 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**changeplayerinmap(t_data *mlx, int dir)
 	while (mlx->map[++i])
 	{
 		map = getmap(mlx, &mlx->movecounter, dir, i);
-		if (map)
+		if (!map)
 			destroy_game(mlx, "Error: map is empty\n");
 	}
 	return (mlx->map);

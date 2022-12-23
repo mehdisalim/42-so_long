@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:39:04 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/23 18:46:57 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/23 18:58:45 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	so_long(char *map, char	*part)
 	}
 	mlx = init(map, part);
 	if (!check_size(mlx.map) ||!check_wall(mlx.map) || !check_players(mlx.map)
-		|| !check_invalid_char(mlx.map) || !check_door(mlx.map, &mlx)
+		|| !check_invalid_char(mlx.map, mlx) || !check_door(mlx.map, &mlx)
 		|| !check_is_rectangle(mlx.map) || !mlx.totalcoins
 		|| !check_path(getfullcontent(map)))
 		destroy_game(&mlx, "invalid map");

@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:26:00 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/23 18:50:21 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/23 18:59:05 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,23 @@ int	check_door(char **s, t_data *mlx)
 	return (1);
 }
 
-int	check_invalid_char(char **s)
+int	check_invalid_char(char **s, t_data mlx)
 {
 	int		i;
 	int		j;
 	char	*message;
+	char	*str;
 	
 	i = -1;
 	message = "Error: there is invalid characters in the map\n";
-	// if (mlx->part == 1)
-	// 	str = "E01PCX\n";
+	str = "E01PC\n";
+	if (mlx.part == 1)
+		str = "E01PCX\n";
 	while (s[++i])
 	{
 		j = -1;
 		while (s[i][++j])
-			if (!ft_strchr("E01PCX\n", s[i][j]))
+			if (!ft_strchr(str, s[i][j]))
 				return (ft_printf(message), 0);
 	}
 	return (1);

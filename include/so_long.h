@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/23 18:46:52 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/23 18:58:52 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		check_wall(char	**s);
 int		check_players(char	**s);
 int		check_door(char	**s, t_data *mlx);
 int		check_coins(char	**s);
-int		check_invalid_char(char	**s);
+int		check_invalid_char(char	**s, t_data mlx);
 int		check_is_rectangle(char **content);
 int		check_path(char **map);
 void	destroy_game(t_data *mlx, char *message);
