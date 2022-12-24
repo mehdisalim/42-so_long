@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/23 18:58:52 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 12:34:46 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		check_invalid_char(char	**s, t_data mlx);
 int		check_is_rectangle(char **content);
 int		check_path(char **map);
 void	destroy_game(t_data *mlx, char *message);
+void	freemap(char	**map);
 
 int		key_hook(int key, t_data *mlx);
 int		close_win(t_data *mlx);

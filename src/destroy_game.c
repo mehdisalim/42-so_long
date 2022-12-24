@@ -6,13 +6,13 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:03:37 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/22 12:41:11 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 12:34:37 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-static void	freemap(char	**map)
+void	freemap(char	**map)
 {
 	int	i;
 
