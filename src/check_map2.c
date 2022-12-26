@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:26:00 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 12:35:01 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/26 15:38:27 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_invalid_char(char **s, t_data mlx)
 	int		j;
 	char	*message;
 	char	*str;
-	
+
 	i = -1;
 	message = "Error: there is invalid characters in the map\n";
 	str = "E01PC\n";
