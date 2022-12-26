@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:00:09 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 12:34:46 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/26 15:45:09 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		loop_hook(t_data *mlx);
 t_list	*init_lists(char **map);
 int		move_enemy(t_data *mlx);
 void	*get_image(t_data *mlx, char *filename);
+t_data	init(char *filename, char	*part);
 
 char	**move_down(t_data	*mlx, int i, int j);
 char	**move_up(t_data	*mlx, int i, int j);
